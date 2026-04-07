@@ -26,7 +26,6 @@ function AdminPage() {
       .select('*')
       .eq('status', filter)
       .order('created_at', { ascending: false })
-
     if (!error) setExhibitors(data)
     setLoading(false)
   }
@@ -36,7 +35,6 @@ function AdminPage() {
       .from('exhibitors')
       .update({ status: newStatus })
       .eq('id', id)
-
     if (!error) fetchExhibitors()
   }
 
@@ -51,14 +49,12 @@ function AdminPage() {
         <h1 className="admin-title">管理画面</h1>
         <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
       </div>
-
       <div className="admin-container">
         <div className="filter-tabs">
           <button className={`filter-tab ${filter === 'pending' ? 'active' : ''}`} onClick={() => setFilter('pending')}>審査待ち</button>
           <button className={`filter-tab ${filter === 'approved' ? 'active' : ''}`} onClick={() => setFilter('approved')}>承認済み</button>
           <button className={`filter-tab ${filter === 'rejected' ? 'active' : ''}`} onClick={() => setFilter('rejected')}>却下済み</button>
         </div>
-
         {loading ? (
           <p className="admin-loading">読み込み中...</p>
         ) : exhibitors.length === 0 ? (
@@ -86,6 +82,7 @@ function AdminPage() {
                     {filter !== 'pending' && (
                       <button className="action-btn pending" onClick={() => updateStatus(ex.id, 'pending')}>審査待ちに戻す</button>
                     )}
+                    <button className="action-btn edit" onClick={() => navigate(`/admin/edit/${ex.id}`)}>編集する</button>
                   </div>
                 </div>
               </div>

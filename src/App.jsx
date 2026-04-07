@@ -5,6 +5,7 @@ import ExhibitorDetail from './pages/ExhibitorDetail'
 import ApplyPage from './pages/ApplyPage'
 import AdminLogin from './pages/AdminLogin'
 import AdminPage from './pages/AdminPage'
+import AdminEditPage from './pages/AdminEditPage'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/apply" element={<ApplyPage />} />
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminPage />} />
+      <Route path="/admin/edit/:id" element={<AdminEditPage />} />
     </Routes>
   )
 }
