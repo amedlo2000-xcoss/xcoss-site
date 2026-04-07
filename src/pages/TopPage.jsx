@@ -16,6 +16,28 @@ const faq = [
   { q: "当日のブース設営はどうすればいいですか？", a: "イベント当日は開場1時間前から設営可能です。設営ガイドを事前にメールでお送りします。" },
 ]
 
+// 開催日程データ（将来的にSupabase化しやすい構造）
+const events = [
+  {
+    id: 1,
+    name: 'XCOSS Vol.1',
+    date: '2026年5月3日（日）',
+    time: '10:00〜17:00',
+    venue: '〇〇公園 イベント広場',
+    address: '東京都〇〇区〇〇1-2-3',
+    note: '入場無料・雨天決行',
+  },
+  {
+    id: 2,
+    name: 'XCOSS Vol.2',
+    date: '2026年10月11日（日）',
+    time: '10:00〜17:00',
+    venue: '〇〇公園 イベント広場',
+    address: '東京都〇〇区〇〇1-2-3',
+    note: '入場無料・雨天決行',
+  },
+]
+
 function Hero() {
   const navigate = useNavigate()
 
@@ -191,6 +213,47 @@ function Contact() {
   )
 }
 
+function Events() {
+  return (
+    <section className="section section-gray" id="events">
+      <div className="container">
+        <h2 className="section-title">開催日程</h2>
+        <div className="events-list">
+          {events.map((ev) => (
+            <div key={ev.id} className="event-card">
+              <div className="event-name">{ev.name}</div>
+              <div className="event-details">
+                <div className="event-row">
+                  <span className="event-label">📅 開催日</span>
+                  <span className="event-value">{ev.date}</span>
+                </div>
+                <div className="event-row">
+                  <span className="event-label">🕐 時間</span>
+                  <span className="event-value">{ev.time}</span>
+                </div>
+                <div className="event-row">
+                  <span className="event-label">📍 会場</span>
+                  <span className="event-value">{ev.venue}</span>
+                </div>
+                <div className="event-row">
+                  <span className="event-label">🗺️ 住所</span>
+                  <span className="event-value">{ev.address}</span>
+                </div>
+                {ev.note && (
+                  <div className="event-row">
+                    <span className="event-label">📝 備考</span>
+                    <span className="event-value">{ev.note}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Footer() {
   return <footer className="footer"><p>&copy; 2026 XCOSS. All rights reserved.</p></footer>
 }
@@ -205,6 +268,7 @@ function TopPage() {
       <Flow />
       <Merits />
       <FAQ />
+      <Events />
       <Contact />
       <Footer />
     </div>

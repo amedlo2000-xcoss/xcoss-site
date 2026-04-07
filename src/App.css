@@ -194,3 +194,45 @@ body {
   background: #e94560;
   color: white;
 }
+
+/* 開催日程 */
+.events-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.event-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-top: 4px solid #e94560;
+}
+.event-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+}
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-row {
+  display: flex;
+  gap: 12px;
+  font-size: 0.95rem;
+  align-items: flex-start;
+}
+.event-label {
+  color: #999;
+  min-width: 80px;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+.event-value {
+  color: #333;
+  font-weight: 500;
+  line-height: 1.5;
+}
