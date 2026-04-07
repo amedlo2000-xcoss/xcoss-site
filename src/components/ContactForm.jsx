@@ -1,28 +1,62 @@
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 import '../ContactForm.css'
 
 function ContactForm() {
   const [form, setForm] = useState({
     name: '',
-    shopName: '',
     email: '',
+    subject: '',
     message: '',
   })
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('送信内容:', form)
-    alert('送信しました！\nコンソールに内容が出力されています。')
+    setLoading(true)
+    setError('')
+    setSuccess(false)
+
+    const { error: insertError } = await supabase
+      .from('contacts')
+      .insert([{
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message,
+      }])
+
+    if (insertError) {
+      setError('送信に失敗しました。もう一度お試しください。')
+    } else {
+      setSuccess(true)
+      setForm({ name: '', email: '', subject: '', message: '' })
+    }
+
+    setLoading(false)
   }
 
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
+      {success && (
+        <div className="contact-success">
+          ✅ お問い合わせを受け付けました。ありがとうございます！
+        </div>
+      )}
+      {error && (
+        <div className="contact-error">
+          ❌ {error}
+        </div>
+      )}
+
       <div className="form-group">
-        <label className="form-label">名前</label>
+        <label className="form-label">名前 *</label>
         <input
           className="form-input"
           type="text"
@@ -34,19 +68,7 @@ function ContactForm() {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">屋号</label>
-        <input
-          className="form-input"
-          type="text"
-          name="shopName"
-          value={form.shopName}
-          onChange={handleChange}
-          placeholder="例：たこ焼き 浪速屋"
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label className="form-label">メール</label>
+        <label className="form-label">メール *</label>
         <input
           className="form-input"
           type="email"
@@ -58,7 +80,18 @@ function ContactForm() {
         />
       </div>
       <div className="form-group">
-        <label className="form-label">内容</label>
+        <label className="form-label">件名</label>
+        <input
+          className="form-input"
+          type="text"
+          name="subject"
+          value={form.subject}
+          onChange={handleChange}
+          placeholder="例：出店費用について"
+        />
+      </div>
+      <div className="form-group">
+        <label className="form-label">内容 *</label>
         <textarea
           className="form-textarea"
           name="message"
@@ -69,7 +102,9 @@ function ContactForm() {
           required
         />
       </div>
-      <button className="form-submit" type="submit">送信する</button>
+      <button className="form-submit" type="submit" disabled={loading}>
+        {loading ? '送信中...' : '送信する'}
+      </button>
     </form>
   )
 }

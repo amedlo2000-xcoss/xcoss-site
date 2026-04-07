@@ -4,19 +4,16 @@
   gap: 20px;
   max-width: 600px;
 }
-
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 .form-label {
   font-size: 0.9rem;
   font-weight: bold;
   color: #333;
 }
-
 .form-input,
 .form-textarea {
   padding: 12px 14px;
@@ -29,16 +26,13 @@
   transition: border-color 0.2s;
   font-family: inherit;
 }
-
 .form-input:focus,
 .form-textarea:focus {
   border-color: #e94560;
 }
-
 .form-textarea {
   resize: vertical;
 }
-
 .form-submit {
   padding: 14px;
   background-color: #e94560;
@@ -49,7 +43,27 @@
   cursor: pointer;
   transition: opacity 0.2s;
 }
-
 .form-submit:hover {
   opacity: 0.85;
+}
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.contact-success {
+  background: #e6f9ee;
+  color: #1e7e3e;
+  border: 1px solid #a3d9b1;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+.contact-error {
+  background: #ffe0e0;
+  color: #c00;
+  border: 1px solid #f5a5a5;
+  padding: 14px 16px;
+  border-radius: 6px;
+  font-size: 0.95rem;
 }
