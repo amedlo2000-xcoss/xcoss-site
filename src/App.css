@@ -166,3 +166,31 @@ body {
   padding: 24px;
   font-size: 0.85rem;
 }
+
+/* カテゴリー絞り込み */
+.category-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.category-filter-btn {
+  padding: 8px 18px;
+  border: 2px solid #ddd;
+  background: white;
+  color: #1a1a2e;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+.category-filter-btn:hover {
+  border-color: #e94560;
+  color: #e94560;
+}
+.category-filter-btn.active {
+  border-color: #e94560;
+  background: #e94560;
+  color: white;
+}

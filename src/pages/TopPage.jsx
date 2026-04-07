@@ -67,6 +67,7 @@ function Vendors() {
   const navigate = useNavigate()
   const [exhibitors, setExhibitors] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedCategory, setSelectedCategory] = useState('すべて')
 
   useEffect(() => {
     const fetchExhibitors = async () => {
@@ -82,17 +83,36 @@ function Vendors() {
     fetchExhibitors()
   }, [])
 
+  const filteredExhibitors = selectedCategory === 'すべて'
+    ? exhibitors
+    : exhibitors.filter((ex) => ex.category === selectedCategory)
+
+  const usedCategories = ['すべて', ...Array.from(new Set(exhibitors.map((ex) => ex.category).filter(Boolean)))]
+
   return (
     <section className="section" id="vendors">
       <div className="container">
         <h2 className="section-title">出店者一覧</h2>
+        {!loading && exhibitors.length > 0 && (
+          <div className="category-filter">
+            {usedCategories.map((cat) => (
+              <button
+                key={cat}
+                className={`category-filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        )}
         {loading ? (
           <p style={{ color: '#999' }}>読み込み中...</p>
-        ) : exhibitors.length === 0 ? (
-          <p style={{ color: '#999' }}>現在公開中の出店者はいません。</p>
+        ) : filteredExhibitors.length === 0 ? (
+          <p style={{ color: '#999' }}>該当する出店者はいません。</p>
         ) : (
           <div className="vendor-grid">
-            {exhibitors.map((ex) => (
+            {filteredExhibitors.map((ex) => (
               <div key={ex.id} onClick={() => navigate(`/exhibitor/${ex.id}`)} style={{ cursor: 'pointer' }}>
                 <ExhibitorCard
                   image={ex.image_url || 'https://placehold.co/400x200?text=No+Image'}
