@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import '../AdminReferrersPage.css'
 
-const emptyForm = { name: '', email: '', code: '' }
+const emptyForm = { name: '', email: '', code: '', nickname: '' }
 
 function AdminReferrersPage() {
   const navigate = useNavigate()
@@ -101,6 +101,10 @@ function AdminReferrersPage() {
               <input className="form-input" type="email" name="email" value={form.email} onChange={handleChange} required placeholder="例：info@example.com" />
             </div>
             <div className="form-group">
+              <label className="form-label">ニックネーム（申込みフォームに表示される名前）</label>
+              <input className="form-input" type="text" name="nickname" value={form.nickname} onChange={handleChange} placeholder="例：やまちゃん" />
+            </div>
+            <div className="form-group">
               <label className="form-label">紹介コード *</label>
               <div className="code-input-wrap">
                 <input className="form-input" type="text" name="code" value={form.code} onChange={handleChange} required placeholder="例：XCOSS-ABC123" />
@@ -131,6 +135,7 @@ function AdminReferrersPage() {
                       <span className="referrer-count">{count}件紹介</span>
                     </div>
                     <p className="referrer-email">📧 {r.email}</p>
+                    {r.nickname && <p className="referrer-code">👤 ニックネーム：{r.nickname}</p>}
                     <p className="referrer-code">🔑 {r.code}</p>
                     <p className="referrer-date">登録日: {new Date(r.created_at).toLocaleDateString('ja-JP')}</p>
                     <button className="referrer-delete-btn" onClick={() => handleDelete(r.id, r.name)}>削除</button>

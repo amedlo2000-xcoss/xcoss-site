@@ -35,7 +35,7 @@ function ApplyPage() {
           .select('*')
           .eq('code', ref.trim())
           .single()
-        if (data) setReferrer(data)
+        if (data) { setReferrer(data) }
         else setCodeError('紹介コードが見つかりません')
       }
       autoCheck()
@@ -183,7 +183,7 @@ function ApplyPage() {
               </button>
             </div>
             {codeError && <p className="code-error">{codeError}</p>}
-            {referrer && <p className="code-success">✅ 紹介者：{referrer.name}</p>}
+            {referrer && <p className="code-success">✅ 紹介者：{referrer.nickname || referrer.name}</p>}
           </div>
           <button className="apply-btn" type="submit" disabled={loading}>
             {loading ? '送信中...' : '申込みを送信する'}
