@@ -18,15 +18,21 @@ const faq = [
 
 function Hero() {
   const navigate = useNavigate()
+
+  const scrollTo = (id) => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <section className="hero">
       <div className="container">
         <h1 className="hero-title">XCOSS 出店者紹介サイト</h1>
         <p className="hero-desc">XCOSSはハンドメイド・フード・アートなど多彩なジャンルが集まるマーケットイベントです。個性あふれる出店者たちとの出会いをお楽しみください。</p>
         <div className="hero-buttons">
-          <button className="btn btn-primary">出店者を見る</button>
+          <button className="btn btn-primary" onClick={() => scrollTo('vendors')}>出店者を見る</button>
           <button className="btn btn-secondary" onClick={() => navigate('/apply')}>出店申込み</button>
-          <button className="btn btn-outline">お問い合わせ</button>
+          <button className="btn btn-outline" onClick={() => scrollTo('contact')}>お問い合わせ</button>
         </div>
       </div>
     </section>
@@ -77,7 +83,7 @@ function Vendors() {
   }, [])
 
   return (
-    <section className="section">
+    <section className="section" id="vendors">
       <div className="container">
         <h2 className="section-title">出店者一覧</h2>
         {loading ? (
@@ -155,7 +161,7 @@ function FAQ() {
 
 function Contact() {
   return (
-    <section className="section">
+    <section className="section" id="contact">
       <div className="container">
         <h2 className="section-title">お問い合わせ</h2>
         <p className="section-text" style={{ marginBottom: '32px' }}>出店に関するご質問・ご相談はこちらからお気軽にどうぞ。</p>
