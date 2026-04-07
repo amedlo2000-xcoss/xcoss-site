@@ -84,6 +84,18 @@
   border-color: #e94560;
 }
 .form-textarea { resize: vertical; }
+.edit-section-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a1a2e;
+  border-left: 4px solid #e94560;
+  padding-left: 10px;
+  margin-top: 8px;
+}
+.edit-no-image {
+  color: #999;
+  font-size: 0.9rem;
+}
 .edit-current-image {
   width: 100%;
   max-height: 200px;
