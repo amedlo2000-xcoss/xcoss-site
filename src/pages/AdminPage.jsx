@@ -35,7 +35,55 @@ function AdminPage() {
       .from('exhibitors')
       .update({ status: newStatus })
       .eq('id', id)
-    if (!error) fetchExhibitors()
+    if (!error) {
+      // 承認時に報酬計算
+      if (newStatus === 'approved') {
+        await calculateReward(id)
+      }
+      fetchExhibitors()
+    }
+  }
+
+  const calculateReward = async (exhibitorId) => {
+    try {
+      // 二重計算チェック
+      const { data: existing } = await supabase
+        .from('referral_rewards')
+        .select('id')
+        .eq('exhibitor_id', exhibitorId)
+        .single()
+      if (existing) return // 既に計算済み
+
+      // 紹介関係を取得
+      const { data: referral } = await supabase
+        .from('referrals')
+        .select('*, referrers(*)')
+        .eq('exhibitor_id', exhibitorId)
+        .single()
+      if (!referral) return // 紹介者なし
+
+      // 紹介者の過去承認件数を取得
+      const { data: pastRewards } = await supabase
+        .from('referral_rewards')
+        .select('id')
+        .eq('referrer_id', referral.referrer_id)
+
+      const isFirstTime = !pastRewards || pastRewards.length === 0
+      const rewardRate = isFirstTime ? 70 : 50
+      const rewardType = isFirstTime ? '初回報酬' : 'リピーター報酬'
+
+      // 報酬を保存
+      await supabase.from('referral_rewards').insert([{
+        referrer_id: referral.referrer_id,
+        exhibitor_id: exhibitorId,
+        referral_id: referral.id,
+        reward_rate: rewardRate,
+        reward_type: rewardType,
+        is_first_time: isFirstTime,
+      }])
+    } catch (err) {
+      console.error('報酬計算エラー:', err)
+    }
   }
 
   const handleDelete = async (id, shopName) => {
@@ -61,6 +109,7 @@ function AdminPage() {
           <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 日程管理</button>
           <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 開催日程</button>
           <button className="contacts-link-btn" onClick={() => navigate('/admin/referrers')}>👥 紹介者管理</button>
+          <button className="contacts-link-btn" onClick={() => navigate('/admin/rewards')}>💰 報酬管理</button>
           <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
         </div>
       </div>

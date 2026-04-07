@@ -10,6 +10,7 @@ import AdminContactsPage from './pages/AdminContactsPage'
 import AdminEventsPage from './pages/AdminEventsPage'
 import AdminReferrersPage from './pages/AdminReferrersPage'
 import ReferrerMyPage from './pages/ReferrerMyPage'
+import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/admin/events" element={<AdminEventsPage />} />
       <Route path="/admin/referrers" element={<AdminReferrersPage />} />
       <Route path="/referrer" element={<ReferrerMyPage />} />
+      <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
   )
 }
