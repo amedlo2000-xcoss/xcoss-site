@@ -80,9 +80,16 @@ function AdminEditPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setSaving(true)
     setError('')
     setSuccess(false)
+
+    // 画像サイズチェック（5MB以下）
+    if (image && image.size > 5 * 1024 * 1024) {
+      setError('画像サイズは5MB以下にしてください')
+      return
+    }
+
+    setSaving(true)
 
     try {
       let image_url = form.image_url

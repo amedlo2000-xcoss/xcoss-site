@@ -28,13 +28,19 @@ function ApplyPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
     setError('')
+
+    // 画像サイズチェック（5MB以下）
+    if (image && image.size > 5 * 1024 * 1024) {
+      setError('画像サイズは5MB以下にしてください')
+      return
+    }
+
+    setLoading(true)
 
     try {
       let image_url = ''
 
-      // 画像アップロード
       if (image) {
         const ext = image.name.split('.').pop()
         const fileName = `${Date.now()}.${ext}`
@@ -50,7 +56,6 @@ function ApplyPage() {
         image_url = data.publicUrl
       }
 
-      // DBに保存
       const { error: insertError } = await supabase
         .from('exhibitors')
         .insert([{ ...form, image_url, status: 'pending' }])
@@ -105,7 +110,7 @@ function ApplyPage() {
             </select>
           </div>
           <div className="form-group">
-            <label className="form-label">画像</label>
+            <label className="form-label">画像（5MB以下）</label>
             <input className="form-input" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
           </div>
           <button className="apply-btn" type="submit" disabled={loading}>
