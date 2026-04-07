@@ -8,6 +8,7 @@ import AdminPage from './pages/AdminPage'
 import AdminEditPage from './pages/AdminEditPage'
 import AdminContactsPage from './pages/AdminContactsPage'
 import AdminEventsPage from './pages/AdminEventsPage'
+import AdminReferrersPage from './pages/AdminReferrersPage'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/admin/edit/:id" element={<AdminEditPage />} />
       <Route path="/admin/contacts" element={<AdminContactsPage />} />
       <Route path="/admin/events" element={<AdminEventsPage />} />
+      <Route path="/admin/referrers" element={<AdminReferrersPage />} />
     </Routes>
   )
 }

@@ -60,6 +60,7 @@ function AdminPage() {
           <button className="contacts-link-btn" onClick={() => navigate('/admin/contacts')}>📧 お問い合わせ</button>
           <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 日程管理</button>
           <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 開催日程</button>
+          <button className="contacts-link-btn" onClick={() => navigate('/admin/referrers')}>👥 紹介者管理</button>
           <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
         </div>
       </div>

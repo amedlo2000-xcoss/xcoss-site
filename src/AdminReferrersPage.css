@@ -1,0 +1,220 @@
+.referrers-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+.referrers-header {
+  background: #1a1a2e;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.referrers-title { font-size: 1.3rem; font-weight: bold; }
+.referrers-header-actions { display: flex; gap: 12px; }
+.referrers-back-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.referrers-back-btn:hover { opacity: 0.7; }
+.referrers-logout-btn {
+  background: transparent;
+  border: 1px solid #e94560;
+  color: #e94560;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.referrers-logout-btn:hover { opacity: 0.7; }
+.referrers-container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.referrers-form-box, .referrers-list-box {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.referrers-form-title, .referrers-list-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  border-left: 4px solid #e94560;
+  padding-left: 10px;
+}
+.referrers-error {
+  background: #ffe0e0;
+  color: #c00;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+.referrers-success {
+  background: #e6f9ee;
+  color: #1e7e3e;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+.referrers-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #1a1a2e;
+}
+.form-input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.form-input:focus { border-color: #e94560; }
+.code-input-wrap {
+  display: flex;
+  gap: 10px;
+}
+.code-input-wrap .form-input { flex: 1; }
+.generate-btn {
+  padding: 12px 16px;
+  background: #0f3460;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s;
+}
+.generate-btn:hover { opacity: 0.85; }
+.referrers-save-btn {
+  padding: 12px 24px;
+  background: #e94560;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  align-self: flex-end;
+}
+.referrers-save-btn:hover { opacity: 0.85; }
+.referrers-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.referrers-loading, .referrers-empty {
+  text-align: center;
+  color: #999;
+  padding: 24px;
+}
+.referrers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.referrer-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.referrer-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.referrer-name { font-size: 1rem; font-weight: bold; color: #1a1a2e; }
+.referrer-count {
+  font-size: 0.8rem;
+  background: #e94560;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.referrer-email, .referrer-code, .referrer-date {
+  font-size: 0.88rem;
+  color: #555;
+}
+.referrer-code { font-weight: bold; color: #0f3460; }
+.referrer-delete-btn {
+  margin-top: 4px;
+  padding: 8px 16px;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.referrer-delete-btn:hover { opacity: 0.8; }
+.referrals-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.referrals-table th {
+  background: #f5f5f5;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: bold;
+  color: #1a1a2e;
+  border-bottom: 2px solid #e0e0e0;
+}
+.referrals-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #444;
+}
+.referrals-table tr:last-child td { border-bottom: none; }
+.status-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.status-badge.approved { background: #e6f9ee; color: #1e7e3e; }
+.status-badge.pending { background: #fff3cd; color: #856404; }
+.status-badge.rejected { background: #ffe0e0; color: #c00; }
+.status-badge.deleted { background: #f0f0f0; color: #999; }
+
+@media (max-width: 600px) {
+  .referrers-header { flex-direction: column; align-items: flex-start; }
+  .referrers-list { grid-template-columns: 1fr; }
+  .referrals-table { font-size: 0.8rem; }
+  .referrals-table th, .referrals-table td { padding: 8px 6px; }
+}

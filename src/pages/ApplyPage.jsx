@@ -18,12 +18,38 @@ function ApplyPage() {
     price: '',
     category: '',
   })
+  const [referralCode, setReferralCode] = useState('')
+  const [referrer, setReferrer] = useState(null)
+  const [codeError, setCodeError] = useState('')
+  const [codeChecking, setCodeChecking] = useState(false)
   const [image, setImage] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
+  const handleCodeCheck = async () => {
+    if (!referralCode.trim()) {
+      setCodeError('紹介コードを入力してください')
+      setReferrer(null)
+      return
+    }
+    setCodeChecking(true)
+    setCodeError('')
+    setReferrer(null)
+    const { data, error } = await supabase
+      .from('referrers')
+      .select('*')
+      .eq('code', referralCode.trim())
+      .single()
+    if (error || !data) {
+      setCodeError('紹介コードが見つかりません')
+    } else {
+      setReferrer(data)
+    }
+    setCodeChecking(false)
   }
 
   const handleSubmit = async (e) => {
@@ -56,11 +82,21 @@ function ApplyPage() {
         image_url = data.publicUrl
       }
 
-      const { error: insertError } = await supabase
+      const { data: insertData, error: insertError } = await supabase
         .from('exhibitors')
         .insert([{ ...form, image_url, status: 'pending' }])
+        .select()
 
       if (insertError) throw insertError
+
+      // 紹介コードが有効な場合はreferralsに保存
+      if (referrer && insertData && insertData[0]) {
+        await supabase.from('referrals').insert([{
+          referrer_id: referrer.id,
+          exhibitor_id: insertData[0].id,
+          code: referralCode.trim(),
+        }])
+      }
 
       alert('申込みが完了しました！審査後に公開されます。')
       navigate('/')
@@ -112,6 +148,23 @@ function ApplyPage() {
           <div className="form-group">
             <label className="form-label">画像（5MB以下）</label>
             <input className="form-input" type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+          </div>
+          <div className="form-group">
+            <label className="form-label">紹介コード（お持ちの場合）</label>
+            <div className="referral-code-wrap">
+              <input
+                className="form-input"
+                type="text"
+                value={referralCode}
+                onChange={(e) => { setReferralCode(e.target.value); setReferrer(null); setCodeError('') }}
+                placeholder="例：XCOSS-XXXX"
+              />
+              <button type="button" className="code-check-btn" onClick={handleCodeCheck} disabled={codeChecking}>
+                {codeChecking ? '確認中...' : '確認'}
+              </button>
+            </div>
+            {codeError && <p className="code-error">{codeError}</p>}
+            {referrer && <p className="code-success">✅ 紹介者：{referrer.name}</p>}
           </div>
           <button className="apply-btn" type="submit" disabled={loading}>
             {loading ? '送信中...' : '申込みを送信する'}
