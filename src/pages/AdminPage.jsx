@@ -58,6 +58,8 @@ function AdminPage() {
         <h1 className="admin-title">管理画面</h1>
         <div style={{ display: 'flex', gap: '12px' }}>
           <button className="contacts-link-btn" onClick={() => navigate('/admin/contacts')}>📧 お問い合わせ</button>
+          <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 日程管理</button>
+          <button className="contacts-link-btn" onClick={() => navigate('/admin/events')}>📅 開催日程</button>
           <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
         </div>
       </div>

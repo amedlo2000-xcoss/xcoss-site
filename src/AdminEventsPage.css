@@ -1,0 +1,166 @@
+.events-admin-page {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+.events-admin-header {
+  background: #1a1a2e;
+  color: white;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.events-admin-title { font-size: 1.3rem; font-weight: bold; }
+.events-admin-header-actions { display: flex; gap: 12px; }
+.events-back-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.events-back-btn:hover { opacity: 0.7; }
+.events-logout-btn {
+  background: transparent;
+  border: 1px solid #e94560;
+  color: #e94560;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.events-logout-btn:hover { opacity: 0.7; }
+.events-admin-container {
+  max-width: 900px;
+  margin: 32px auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.events-form-box, .events-list-box {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+.events-form-title, .events-list-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  border-left: 4px solid #e94560;
+  padding-left: 10px;
+}
+.events-error {
+  background: #ffe0e0;
+  color: #c00;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+.events-success {
+  background: #e6f9ee;
+  color: #1e7e3e;
+  border: 1px solid #a3d9b1;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+.events-form { display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.9rem; font-weight: bold; color: #1a1a2e; }
+.form-input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: #333;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+.form-input:focus { border-color: #e94560; }
+.form-group-checkbox { flex-direction: row; align-items: center; gap: 10px; }
+.form-label-checkbox { font-size: 0.95rem; font-weight: bold; color: #1a1a2e; cursor: pointer; }
+.events-form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 8px; }
+.events-cancel-btn {
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #ccc;
+  color: #666;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.events-cancel-btn:hover { border-color: #999; color: #333; }
+.events-save-btn {
+  padding: 12px 24px;
+  background: #e94560;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.events-save-btn:hover { opacity: 0.85; }
+.events-save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.events-loading, .events-empty { color: #999; text-align: center; padding: 20px; }
+.events-admin-list { display: flex; flex-direction: column; gap: 16px; }
+.events-admin-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.events-admin-card-info { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.events-admin-name { font-size: 1rem; font-weight: bold; color: #1a1a2e; }
+.events-admin-detail { font-size: 0.88rem; color: #555; }
+.events-admin-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+.events-admin-status.published { background: #e6f9ee; color: #1e7e3e; }
+.events-admin-status.draft { background: #f0f0f0; color: #999; }
+.events-admin-actions { display: flex; flex-direction: column; gap: 8px; }
+.events-edit-btn {
+  padding: 8px 16px;
+  background: #0f3460;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+.events-edit-btn:hover { opacity: 0.8; }
+.events-delete-btn {
+  padding: 8px 16px;
+  background: #c0392b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: opacity 0.2s;
+}
+.events-delete-btn:hover { opacity: 0.8; }

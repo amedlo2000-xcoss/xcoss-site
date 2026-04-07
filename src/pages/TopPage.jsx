@@ -16,28 +16,6 @@ const faq = [
   { q: "当日のブース設営はどうすればいいですか？", a: "イベント当日は開場1時間前から設営可能です。設営ガイドを事前にメールでお送りします。" },
 ]
 
-// 開催日程データ（将来的にSupabase化しやすい構造）
-const events = [
-  {
-    id: 1,
-    name: 'XCOSS Vol.1',
-    date: '2026年5月3日（日）',
-    time: '10:00〜17:00',
-    venue: '〇〇公園 イベント広場',
-    address: '東京都〇〇区〇〇1-2-3',
-    note: '入場無料・雨天決行',
-  },
-  {
-    id: 2,
-    name: 'XCOSS Vol.2',
-    date: '2026年10月11日（日）',
-    time: '10:00〜17:00',
-    venue: '〇〇公園 イベント広場',
-    address: '東京都〇〇区〇〇1-2-3',
-    note: '入場無料・雨天決行',
-  },
-]
-
 function Hero() {
   const navigate = useNavigate()
 
@@ -214,6 +192,25 @@ function Contact() {
 }
 
 function Events() {
+  const [events, setEvents] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .eq('is_published', true)
+        .order('created_at', { ascending: true })
+      if (!error) setEvents(data)
+      setLoading(false)
+    }
+    fetchEvents()
+  }, [])
+
+  if (loading) return null
+  if (events.length === 0) return null
+
   return (
     <section className="section section-gray" id="events">
       <div className="container">
