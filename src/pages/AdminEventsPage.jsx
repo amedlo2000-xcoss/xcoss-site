@@ -61,6 +61,11 @@ function AdminEventsPage() {
     })
     setError('')
     setSuccess('')
+    // フォームまで自動スクロール
+    setTimeout(() => {
+      const el = document.getElementById('events-form-top')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
   }
 
   const handleCancel = () => {
@@ -123,7 +128,7 @@ function AdminEventsPage() {
       </div>
 
       <div className="events-admin-container">
-        <div className="events-form-box">
+        <div className="events-form-box" id="events-form-top">
           <h2 className="events-form-title">{editingId ? '日程を編集' : '新しい日程を追加'}</h2>
           {error && <p className="events-error">{error}</p>}
           {success && <p className="events-success">✅ {success}</p>}
