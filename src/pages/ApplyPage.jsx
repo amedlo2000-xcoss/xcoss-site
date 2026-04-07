@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import '../ApplyPage.css'
 
@@ -22,6 +22,25 @@ function ApplyPage() {
   const [referrer, setReferrer] = useState(null)
   const [codeError, setCodeError] = useState('')
   const [codeChecking, setCodeChecking] = useState(false)
+  const [searchParams] = useSearchParams()
+
+  useEffect(() => {
+    const ref = searchParams.get('ref')
+    if (ref) {
+      setReferralCode(ref)
+      // 自動でコード確認
+      const autoCheck = async () => {
+        const { data } = await supabase
+          .from('referrers')
+          .select('*')
+          .eq('code', ref.trim())
+          .single()
+        if (data) setReferrer(data)
+        else setCodeError('紹介コードが見つかりません')
+      }
+      autoCheck()
+    }
+  }, [])
   const [image, setImage] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
