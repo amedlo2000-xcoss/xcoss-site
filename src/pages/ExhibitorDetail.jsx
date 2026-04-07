@@ -1,11 +1,29 @@
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import exhibitors from '../data/exhibitors.json'
+import { supabase } from '../lib/supabase'
 import '../ExhibitorDetail.css'
 
 function ExhibitorDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const exhibitor = exhibitors.find((ex) => ex.id === Number(id))
+  const [exhibitor, setExhibitor] = useState(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchExhibitor = async () => {
+      const { data, error } = await supabase
+        .from('exhibitors')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+      if (!error) setExhibitor(data)
+      setLoading(false)
+    }
+    fetchExhibitor()
+  }, [id])
+
+  if (loading) return <div className="detail-page"><div className="detail-container"><p>読み込み中...</p></div></div>
 
   if (!exhibitor) {
     return (
@@ -20,9 +38,13 @@ function ExhibitorDetail() {
     <div className="detail-page">
       <div className="detail-container">
         <button className="detail-back" onClick={() => navigate('/')}>← 一覧に戻る</button>
-        <img src={exhibitor.image} alt={exhibitor.name} className="detail-image" />
+        <img
+          src={exhibitor.image_url || 'https://placehold.co/400x300?text=No+Image'}
+          alt={exhibitor.shop_name}
+          className="detail-image"
+        />
         <div className="detail-body">
-          <p className="detail-shop-name">{exhibitor.name}</p>
+          <p className="detail-shop-name">{exhibitor.shop_name}</p>
           <h1 className="detail-title">{exhibitor.title}</h1>
           <p className="detail-description">{exhibitor.description}</p>
           <p className="detail-price">💴 {exhibitor.price}</p>

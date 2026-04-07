@@ -2,12 +2,18 @@ import { Routes, Route } from 'react-router-dom'
 import './App.css'
 import TopPage from './pages/TopPage'
 import ExhibitorDetail from './pages/ExhibitorDetail'
+import ApplyPage from './pages/ApplyPage'
+import AdminLogin from './pages/AdminLogin'
+import AdminPage from './pages/AdminPage'
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<TopPage />} />
       <Route path="/exhibitor/:id" element={<ExhibitorDetail />} />
+      <Route path="/apply" element={<ApplyPage />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminPage />} />
     </Routes>
   )
 }

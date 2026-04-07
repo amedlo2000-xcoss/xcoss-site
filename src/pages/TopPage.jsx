@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../App.css'
 import ExhibitorCard from '../components/ExhibitorCard'
 import ContactForm from '../components/ContactForm'
-import exhibitors from '../data/exhibitors.json'
+import { supabase } from '../lib/supabase'
 
 const categories = [
   "フード・ドリンク", "ハンドメイド・クラフト", "アパレル・ファッション", "植物・フラワー",
@@ -16,6 +17,7 @@ const faq = [
 ]
 
 function Hero() {
+  const navigate = useNavigate()
   return (
     <section className="hero">
       <div className="container">
@@ -23,7 +25,7 @@ function Hero() {
         <p className="hero-desc">XCOSSはハンドメイド・フード・アートなど多彩なジャンルが集まるマーケットイベントです。個性あふれる出店者たちとの出会いをお楽しみください。</p>
         <div className="hero-buttons">
           <button className="btn btn-primary">出店者を見る</button>
-          <button className="btn btn-secondary">出店申込み</button>
+          <button className="btn btn-secondary" onClick={() => navigate('/apply')}>出店申込み</button>
           <button className="btn btn-outline">お問い合わせ</button>
         </div>
       </div>
@@ -57,23 +59,46 @@ function Categories() {
 
 function Vendors() {
   const navigate = useNavigate()
+  const [exhibitors, setExhibitors] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchExhibitors = async () => {
+      const { data, error } = await supabase
+        .from('exhibitors')
+        .select('*')
+        .eq('status', 'approved')
+        .order('created_at', { ascending: false })
+
+      if (!error) setExhibitors(data)
+      setLoading(false)
+    }
+    fetchExhibitors()
+  }, [])
+
   return (
     <section className="section">
       <div className="container">
         <h2 className="section-title">出店者一覧</h2>
-        <div className="vendor-grid">
-          {exhibitors.map((ex) => (
-            <div key={ex.id} onClick={() => navigate(`/exhibitor/${ex.id}`)} style={{ cursor: 'pointer' }}>
-              <ExhibitorCard
-                image={ex.image}
-                shopName={ex.name}
-                title={ex.title}
-                description={ex.description}
-                price={ex.price}
-              />
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <p style={{ color: '#999' }}>読み込み中...</p>
+        ) : exhibitors.length === 0 ? (
+          <p style={{ color: '#999' }}>現在公開中の出店者はいません。</p>
+        ) : (
+          <div className="vendor-grid">
+            {exhibitors.map((ex) => (
+              <div key={ex.id} onClick={() => navigate(`/exhibitor/${ex.id}`)} style={{ cursor: 'pointer' }}>
+                <ExhibitorCard
+                  image={ex.image_url || 'https://placehold.co/400x200?text=No+Image'}
+                  shopName={ex.shop_name}
+                  title={ex.title}
+                  description={ex.description}
+                  price={ex.price}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
