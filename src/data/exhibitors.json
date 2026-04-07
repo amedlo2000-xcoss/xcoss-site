@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "たこ焼き 浪速屋",
+    "title": "大阪直伝の本格たこ焼き",
+    "description": "外はカリっと、中はとろとろ。特製ソースとマヨネーズが絶品の大阪直伝たこ焼きです。",
+    "price": "6個 500円〜",
+    "image": "https://placehold.co/400x200?text=Shop+1"
+  },
+  {
+    "id": 2,
+    "name": "HANDMADE STUDIO KOTO",
+    "title": "一点もの革製品・アクセサリー",
+    "description": "革製品・アクセサリーのハンドメイド作家。こだわりの一点もの作品を多数展示販売します。",
+    "price": "1,000円〜",
+    "image": "https://placehold.co/400x200?text=Shop+2"
+  },
+  {
+    "id": 3,
+    "name": "グリーンマーケット",
+    "title": "多肉植物と北欧雑貨のセレクト",
+    "description": "多肉植物・観葉植物と北欧雑貨のセレクトショップ。お部屋に彩りを添える植物が揃っています。",
+    "price": "500円〜",
+    "image": "https://placehold.co/400x200?text=Shop+3"
+  }
+]
