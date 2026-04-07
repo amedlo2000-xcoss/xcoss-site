@@ -38,6 +38,15 @@ function AdminPage() {
     if (!error) fetchExhibitors()
   }
 
+  const handleDelete = async (id, shopName) => {
+    if (!window.confirm(`「${shopName}」を削除しますか？\nこの操作は元に戻せません。`)) return
+    const { error } = await supabase
+      .from('exhibitors')
+      .update({ status: 'deleted' })
+      .eq('id', id)
+    if (!error) fetchExhibitors()
+  }
+
   const handleLogout = async () => {
     await supabase.auth.signOut()
     navigate('/admin/login')
@@ -57,6 +66,7 @@ function AdminPage() {
           <button className={`filter-tab ${filter === 'pending' ? 'active' : ''}`} onClick={() => setFilter('pending')}>審査待ち</button>
           <button className={`filter-tab ${filter === 'approved' ? 'active' : ''}`} onClick={() => setFilter('approved')}>承認済み</button>
           <button className={`filter-tab ${filter === 'rejected' ? 'active' : ''}`} onClick={() => setFilter('rejected')}>却下済み</button>
+          <button className={`filter-tab ${filter === 'deleted' ? 'active' : ''}`} onClick={() => setFilter('deleted')}>削除済み</button>
         </div>
         {loading ? (
           <p className="admin-loading">読み込み中...</p>
@@ -86,6 +96,9 @@ function AdminPage() {
                       <button className="action-btn pending" onClick={() => updateStatus(ex.id, 'pending')}>審査待ちに戻す</button>
                     )}
                     <button className="action-btn edit" onClick={() => navigate(`/admin/edit/${ex.id}`)}>編集する</button>
+                    {filter !== 'deleted' && (
+                      <button className="action-btn delete" onClick={() => handleDelete(ex.id, ex.shop_name)}>削除する</button>
+                    )}
                   </div>
                 </div>
               </div>

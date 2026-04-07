@@ -122,3 +122,5 @@
   transition: opacity 0.2s;
 }
 .contacts-link-btn:hover { opacity: 0.7; }
+
+.action-btn.delete { background: #c0392b; color: white; }

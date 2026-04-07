@@ -230,6 +230,7 @@ function AdminEditPage() {
               <option value="pending">審査待ち</option>
               <option value="approved">承認済み</option>
               <option value="rejected">却下済み</option>
+              <option value="deleted">削除済み</option>
             </select>
           </div>
 
