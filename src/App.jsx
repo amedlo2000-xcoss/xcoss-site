@@ -6,6 +6,7 @@ import ApplyPage from './pages/ApplyPage'
 import AdminLogin from './pages/AdminLogin'
 import AdminPage from './pages/AdminPage'
 import AdminEditPage from './pages/AdminEditPage'
+import AdminContactsPage from './pages/AdminContactsPage'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/admin/edit/:id" element={<AdminEditPage />} />
+      <Route path="/admin/contacts" element={<AdminContactsPage />} />
     </Routes>
   )
 }

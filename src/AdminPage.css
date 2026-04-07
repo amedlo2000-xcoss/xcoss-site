@@ -110,3 +110,15 @@
 .action-btn.reject { background: #e74c3c; color: white; }
 .action-btn.pending { background: #95a5a6; color: white; }
 .action-btn.edit { background: #0f3460; color: white; }
+
+.contacts-link-btn {
+  background: transparent;
+  border: 1px solid #e94560;
+  color: #e94560;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.contacts-link-btn:hover { opacity: 0.7; }

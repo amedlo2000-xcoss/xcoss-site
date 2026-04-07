@@ -47,7 +47,10 @@ function AdminPage() {
     <div className="admin-page">
       <div className="admin-header">
         <h1 className="admin-title">管理画面</h1>
-        <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
+        <div style={{ display: 'flex', gap: '12px' }}>
+          <button className="contacts-link-btn" onClick={() => navigate('/admin/contacts')}>📧 お問い合わせ</button>
+          <button className="logout-btn" onClick={handleLogout}>ログアウト</button>
+        </div>
       </div>
       <div className="admin-container">
         <div className="filter-tabs">
