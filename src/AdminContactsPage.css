@@ -98,3 +98,16 @@
   padding: 12px;
   border-radius: 6px;
 }
+
+/* レスポンシブ */
+@media (max-width: 600px) {
+  .contacts-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .contact-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

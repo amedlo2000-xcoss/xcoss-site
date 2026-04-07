@@ -87,3 +87,8 @@
 
 .apply-btn:hover { opacity: 0.85; }
 .apply-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+@media (max-width: 600px) {
+  .apply-page { padding: 32px 0; }
+  .apply-form { padding: 20px; }
+}

@@ -82,3 +82,9 @@
   align-items: center;
   gap: 24px;
 }
+
+@media (max-width: 600px) {
+  .detail-image { height: 200px; }
+  .detail-body { padding: 20px; }
+  .detail-title { font-size: 1.3rem; }
+}

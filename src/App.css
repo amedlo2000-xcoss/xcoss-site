@@ -236,3 +236,20 @@ body {
   font-weight: 500;
   line-height: 1.5;
 }
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 600px) {
+  .hero { padding: 60px 0; }
+  .hero-title { font-size: 1.6rem; }
+  .hero-desc { font-size: 0.95rem; }
+  .hero-buttons { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 280px; text-align: center; }
+  .section { padding: 48px 0; }
+  .section-title { font-size: 1.3rem; }
+  .category-grid { grid-template-columns: repeat(2, 1fr); }
+  .vendor-grid { grid-template-columns: 1fr; }
+  .category-filter { gap: 8px; }
+  .category-filter-btn { font-size: 0.82rem; padding: 6px 12px; }
+  .events-list { grid-template-columns: 1fr; }
+  .merit-grid { grid-template-columns: 1fr; }
+}
