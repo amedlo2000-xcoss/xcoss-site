@@ -10,6 +10,8 @@ import AdminContactsPage from './pages/AdminContactsPage'
 import AdminEventsPage from './pages/AdminEventsPage'
 import AdminReferrersPage from './pages/AdminReferrersPage'
 import ReferrerMyPage from './pages/ReferrerMyPage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
       <Route path="/admin/events" element={<AdminEventsPage />} />
       <Route path="/admin/referrers" element={<AdminReferrersPage />} />
       <Route path="/referrer" element={<ReferrerMyPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
       <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
   )
