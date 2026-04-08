@@ -373,3 +373,49 @@
 .diff-up { background: #e6f9ee; color: #1e7e3e; }
 .diff-down { background: #ffe0e0; color: #c00; }
 .diff-none { background: #f0f0f0; color: #999; }
+
+/* ===== スマホ追加対応 ===== */
+@media (max-width: 600px) {
+  /* 活動指数 */
+  .activity-score-wrap {
+    flex-direction: row;
+    gap: 12px;
+  }
+  .activity-level-badge {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+  .activity-score-num { font-size: 1.6rem; }
+
+  /* 月別棒グラフ */
+  .activity-graph {
+    gap: 2px;
+    height: 120px;
+  }
+  .activity-bar-label {
+    font-size: 0.62rem;
+  }
+
+  /* 凡例 */
+  .activity-legend {
+    gap: 10px;
+  }
+  .legend-item { font-size: 0.75rem; }
+
+  /* サマリーカード */
+  .activity-summary {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .summary-card { padding: 10px 4px; }
+  .summary-icon { font-size: 1.1rem; }
+  .summary-value { font-size: 0.95rem; }
+  .summary-label { font-size: 0.7rem; }
+  .summary-pt { font-size: 0.72rem; }
+  .summary-diff { font-size: 0.68rem; padding: 2px 4px; }
+
+  /* グラフタイトル */
+  .activity-graph-title { font-size: 0.88rem; }
+  .activity-score-desc { font-size: 0.75rem; }
+}
