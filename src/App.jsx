@@ -12,6 +12,8 @@ import AdminReferrersPage from './pages/AdminReferrersPage'
 import ReferrerMyPage from './pages/ReferrerMyPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
+import UpdatePasswordPage from './pages/UpdatePasswordPage'
 import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
@@ -29,6 +31,8 @@ function App() {
       <Route path="/referrer" element={<ReferrerMyPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/update-password" element={<UpdatePasswordPage />} />
       <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
   )

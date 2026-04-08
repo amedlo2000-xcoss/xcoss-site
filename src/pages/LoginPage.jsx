@@ -66,6 +66,9 @@ function LoginPage() {
           <Link to="/register" className="login-link">新規登録</Link>
         </p>
         <p className="login-footer">
+          <Link to="/reset-password" className="login-link">パスワードをお忘れの方</Link>
+        </p>
+        <p className="login-footer">
           <Link to="/" className="login-link">トップに戻る</Link>
         </p>
       </div>
