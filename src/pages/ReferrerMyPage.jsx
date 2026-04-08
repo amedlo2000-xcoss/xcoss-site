@@ -2,21 +2,156 @@ import { useState } from 'react'
 import { supabase } from '../lib/supabase'
 import '../ReferrerMyPage.css'
 
+// 月別集計ヘルパー
+const getMonthKey = (dateStr) => {
+  const d = new Date(dateStr)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+}
+
+const getLast6Months = () => {
+  const months = []
+  const now = new Date()
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1)
+    months.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`)
+  }
+  return months
+}
+
+const formatMonth = (key) => {
+  const [y, m] = key.split('-')
+  return `${y}年${parseInt(m)}月`
+}
+
+function ActivityGraph({ referralsData, participationsData, guestReferralsData }) {
+  const months = getLast6Months()
+  const thisMonth = months[months.length - 1]
+
+  // 月別集計
+  const monthlyData = months.map((m) => {
+    const referrals = referralsData.filter(r => getMonthKey(r.created_at) === m).length
+    const participations = participationsData.filter(p => getMonthKey(p.participated_at) === m).length
+    const guests = guestReferralsData.filter(g => getMonthKey(g.referred_at) === m && g.is_new_guest).length
+    const score = referrals * 5 + participations * 2 + guests * 4
+    return { month: m, referrals, participations, guests, score }
+  })
+
+  const thisMonthData = monthlyData.find(m => m.month === thisMonth) || { referrals: 0, participations: 0, guests: 0, score: 0 }
+  const maxScore = Math.max(...monthlyData.map(m => m.score), 1)
+
+  // 活動指数レベル
+  const getLevel = (score) => {
+    if (score >= 30) return { label: 'S', color: '#e94560' }
+    if (score >= 20) return { label: 'A', color: '#f39c12' }
+    if (score >= 10) return { label: 'B', color: '#2ecc71' }
+    if (score >= 5) return { label: 'C', color: '#3498db' }
+    return { label: 'D', color: '#95a5a6' }
+  }
+
+  const level = getLevel(thisMonthData.score)
+
+  return (
+    <div className="referrer-card-box">
+      <h2 className="referrer-section-title">今月の活動インジケーター</h2>
+
+      {/* 活動指数 */}
+      <div className="activity-indicator">
+        <div className="activity-score-wrap">
+          <div className="activity-level-badge" style={{ background: level.color }}>
+            {level.label}
+          </div>
+          <div className="activity-score-info">
+            <span className="activity-score-num">{thisMonthData.score}</span>
+            <span className="activity-score-label">ポイント</span>
+          </div>
+        </div>
+        <div className="activity-score-bar-wrap">
+          <div
+            className="activity-score-bar"
+            style={{ width: `${Math.min((thisMonthData.score / 30) * 100, 100)}%`, background: level.color }}
+          />
+        </div>
+        <p className="activity-score-desc">
+          出店紹介×5pt・イベント参加×2pt・ゲスト紹介×4pt
+        </p>
+      </div>
+
+      {/* 月別棒グラフ */}
+      <h3 className="activity-graph-title">月別活動実績</h3>
+      <div className="activity-graph">
+        {monthlyData.map((m) => (
+          <div key={m.month} className="activity-bar-col">
+            <div className="activity-bar-stack">
+              <div
+                className="activity-bar referrals-bar"
+                style={{ height: `${(m.referrals * 5 / maxScore) * 120}px` }}
+                title={`出店紹介: ${m.referrals}件`}
+              />
+              <div
+                className="activity-bar participations-bar"
+                style={{ height: `${(m.participations * 2 / maxScore) * 120}px` }}
+                title={`イベント参加: ${m.participations}回`}
+              />
+              <div
+                className="activity-bar guests-bar"
+                style={{ height: `${(m.guests * 4 / maxScore) * 120}px` }}
+                title={`ゲスト紹介: ${m.guests}名`}
+              />
+            </div>
+            <span className="activity-bar-label">{formatMonth(m.month).replace('年', '/').replace('月', '')}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* グラフ凡例 */}
+      <div className="activity-legend">
+        <span className="legend-item"><span className="legend-dot referrals-dot" />出店紹介</span>
+        <span className="legend-item"><span className="legend-dot participations-dot" />イベント参加</span>
+        <span className="legend-item"><span className="legend-dot guests-dot" />ゲスト紹介</span>
+      </div>
+
+      {/* 今月サマリー */}
+      <h3 className="activity-graph-title" style={{ marginTop: '24px' }}>今月のサマリー</h3>
+      <div className="activity-summary">
+        <div className="summary-card">
+          <span className="summary-icon">🏪</span>
+          <span className="summary-value">{thisMonthData.referrals}件</span>
+          <span className="summary-label">出店紹介</span>
+          <span className="summary-pt">+{thisMonthData.referrals * 5}pt</span>
+        </div>
+        <div className="summary-card">
+          <span className="summary-icon">📅</span>
+          <span className="summary-value">{thisMonthData.participations}回</span>
+          <span className="summary-label">イベント参加</span>
+          <span className="summary-pt">+{thisMonthData.participations * 2}pt</span>
+        </div>
+        <div className="summary-card">
+          <span className="summary-icon">👥</span>
+          <span className="summary-value">{thisMonthData.guests}名</span>
+          <span className="summary-label">ゲスト紹介</span>
+          <span className="summary-pt">+{thisMonthData.guests * 4}pt</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function ReferrerMyPage() {
   const [code, setCode] = useState('')
   const [referrer, setReferrer] = useState(null)
   const [referrals, setReferrals] = useState([])
+  const [rewards, setRewards] = useState([])
+  const [participations, setParticipations] = useState([])
+  const [guestReferrals, setGuestReferrals] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
-  const [rewards, setRewards] = useState([])
 
   const handleLogin = async (e) => {
     e.preventDefault()
     setLoading(true)
     setError('')
     setReferrer(null)
-    setReferrals([])
 
     const { data: referrerData, error: referrerError } = await supabase
       .from('referrers')
@@ -30,29 +165,27 @@ function ReferrerMyPage() {
       return
     }
 
-    // 紹介実績を取得
-    const { data: referralsData } = await supabase
-      .from('referrals')
-      .select('*, exhibitors(shop_name, title, status, created_at)')
-      .eq('referrer_id', referrerData.id)
-      .order('created_at', { ascending: false })
-
-    // 報酬履歴を取得
-    const { data: rewardsData } = await supabase
-      .from('referral_rewards')
-      .select('*, exhibitors(shop_name)')
-      .eq('referrer_id', referrerData.id)
-      .order('created_at', { ascending: false })
+    const [
+      { data: referralsData },
+      { data: rewardsData },
+      { data: participationsData },
+      { data: guestReferralsData },
+    ] = await Promise.all([
+      supabase.from('referrals').select('*, exhibitors(shop_name, title, status, created_at)').eq('referrer_id', referrerData.id).order('created_at', { ascending: false }),
+      supabase.from('referral_rewards').select('*, exhibitors(shop_name)').eq('referrer_id', referrerData.id).order('created_at', { ascending: false }),
+      supabase.from('event_participations').select('*').eq('referrer_id', referrerData.id),
+      supabase.from('guest_referrals').select('*').eq('referrer_id', referrerData.id),
+    ])
 
     setReferrer(referrerData)
     setReferrals(referralsData || [])
     setRewards(rewardsData || [])
+    setParticipations(participationsData || [])
+    setGuestReferrals(guestReferralsData || [])
     setLoading(false)
   }
 
-  const referralLink = referrer
-    ? `${window.location.origin}/apply?ref=${referrer.code}`
-    : ''
+  const referralLink = referrer ? `${window.location.origin}/apply?ref=${referrer.code}` : ''
 
   const handleCopy = () => {
     navigator.clipboard.writeText(referralLink)
@@ -63,6 +196,9 @@ function ReferrerMyPage() {
   const handleLogout = () => {
     setReferrer(null)
     setReferrals([])
+    setRewards([])
+    setParticipations([])
+    setGuestReferrals([])
     setCode('')
     setError('')
   }
@@ -76,7 +212,6 @@ function ReferrerMyPage() {
     }
   }
 
-  // ログイン前
   if (!referrer) {
     return (
       <div className="referrer-page">
@@ -102,7 +237,6 @@ function ReferrerMyPage() {
     )
   }
 
-  // ログイン後（マイページ）
   return (
     <div className="referrer-page">
       <div className="referrer-header">
@@ -120,17 +254,19 @@ function ReferrerMyPage() {
           <p className="referrer-info">🔑 紹介コード：<strong>{referrer.code}</strong></p>
         </div>
 
+        {/* 活動インジケーター */}
+        <ActivityGraph
+          referralsData={referrals}
+          participationsData={participations}
+          guestReferralsData={guestReferrals}
+        />
+
         {/* 紹介リンク */}
         <div className="referrer-card-box">
           <h2 className="referrer-section-title">紹介リンク</h2>
           <p className="referrer-link-desc">このリンクを出店希望者に共有してください。</p>
           <div className="referrer-link-wrap">
-            <input
-              className="referrer-link-input"
-              type="text"
-              value={referralLink}
-              readOnly
-            />
+            <input className="referrer-link-input" type="text" value={referralLink} readOnly />
             <button className="referrer-copy-btn" onClick={handleCopy}>
               {copied ? '✅ コピー済み' : 'コピー'}
             </button>
@@ -163,7 +299,6 @@ function ReferrerMyPage() {
             </div>
           )}
         </div>
-
 
         {/* 報酬履歴 */}
         <div className="referrer-card-box">
