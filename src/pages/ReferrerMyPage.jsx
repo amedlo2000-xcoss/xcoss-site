@@ -9,6 +9,7 @@ function ReferrerMyPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [copied, setCopied] = useState(false)
+  const [rewards, setRewards] = useState([])
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -36,8 +37,16 @@ function ReferrerMyPage() {
       .eq('referrer_id', referrerData.id)
       .order('created_at', { ascending: false })
 
+    // 報酬履歴を取得
+    const { data: rewardsData } = await supabase
+      .from('referral_rewards')
+      .select('*, exhibitors(shop_name)')
+      .eq('referrer_id', referrerData.id)
+      .order('created_at', { ascending: false })
+
     setReferrer(referrerData)
     setReferrals(referralsData || [])
+    setRewards(rewardsData || [])
     setLoading(false)
   }
 
@@ -151,6 +160,33 @@ function ReferrerMyPage() {
                   </div>
                 )
               })}
+            </div>
+          )}
+        </div>
+
+
+        {/* 報酬履歴 */}
+        <div className="referrer-card-box">
+          <h2 className="referrer-section-title">
+            報酬履歴
+            <span className="referrer-count-badge">{rewards.length}件</span>
+          </h2>
+          {rewards.length === 0 ? (
+            <p className="referrer-empty">まだ報酬履歴はありません。</p>
+          ) : (
+            <div className="referrer-referrals-list">
+              {rewards.map((r) => (
+                <div key={r.id} className="referrer-referral-card">
+                  <div className="referrer-referral-header">
+                    <span className="referrer-referral-shop">{r.exhibitors?.shop_name || '-'}</span>
+                    <span className={`referrer-status-badge ${r.reward_rate === 70 ? 'approved' : 'pending'}`}>
+                      {r.reward_type}
+                    </span>
+                  </div>
+                  <p className="referrer-referral-title">出店回数：{r.entry_count}回目</p>
+                  <p className="referrer-referral-date">確定日：{new Date(r.created_at).toLocaleDateString('ja-JP')}</p>
+                </div>
+              ))}
             </div>
           )}
         </div>

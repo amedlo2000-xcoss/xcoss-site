@@ -46,15 +46,7 @@ function AdminPage() {
 
   const calculateReward = async (exhibitorId) => {
     try {
-      // 二重計算チェック
-      const { data: existing } = await supabase
-        .from('referral_rewards')
-        .select('id')
-        .eq('exhibitor_id', exhibitorId)
-        .single()
-      if (existing) return // 既に計算済み
-
-      // 紹介関係を取得
+      // 紹介関係を取得（最初に紹介した人を探す）
       const { data: referral } = await supabase
         .from('referrals')
         .select('*, referrers(*)')
@@ -62,25 +54,43 @@ function AdminPage() {
         .single()
       if (!referral) return // 紹介者なし
 
-      // 紹介者の過去承認件数を取得
+      // この出店者の過去の承認回数を取得
       const { data: pastRewards } = await supabase
         .from('referral_rewards')
-        .select('id')
-        .eq('referrer_id', referral.referrer_id)
+        .select('id, entry_count')
+        .eq('exhibitor_id', exhibitorId)
+        .order('entry_count', { ascending: false })
 
-      const isFirstTime = !pastRewards || pastRewards.length === 0
+      const entryCount = pastRewards && pastRewards.length > 0
+        ? pastRewards[0].entry_count + 1
+        : 1
+
+      // 二重計算チェック（同じentry_countは保存しない）
+      const { data: existing } = await supabase
+        .from('referral_rewards')
+        .select('id')
+        .eq('exhibitor_id', exhibitorId)
+        .eq('entry_count', entryCount)
+        .single()
+      if (existing) return
+
+      // 初回出店は70%、2回目以降は50%
+      const isFirstTime = entryCount === 1
       const rewardRate = isFirstTime ? 70 : 50
-      const rewardType = isFirstTime ? '初回報酬' : 'リピーター報酬'
+      const rewardType = isFirstTime ? '初回報酬（70%）' : `リピーター報酬（50%）`
 
       // 報酬を保存
       await supabase.from('referral_rewards').insert([{
         referrer_id: referral.referrer_id,
         exhibitor_id: exhibitorId,
         referral_id: referral.id,
+        entry_count: entryCount,
         reward_rate: rewardRate,
         reward_type: rewardType,
-        is_first_time: isFirstTime,
+        reward_status: 'confirmed',
       }])
+
+      console.log(`報酬計算完了: 出店者${exhibitorId} ${entryCount}回目 ${rewardRate}%`)
     } catch (err) {
       console.error('報酬計算エラー:', err)
     }
