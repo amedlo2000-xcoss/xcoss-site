@@ -253,3 +253,43 @@ body {
   .events-list { grid-template-columns: 1fr; }
   .merit-grid { grid-template-columns: 1fr; }
 }
+
+/* ヒーローナビ */
+.hero-nav {
+  background: rgba(0,0,0,0.2);
+  padding: 10px 0;
+}
+.hero-nav-inner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.hero-nav-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-nav-email {
+  font-size: 0.85rem;
+  color: #ccc;
+}
+.hero-nav-btn {
+  padding: 8px 16px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.hero-nav-btn:hover { opacity: 0.7; }
+.hero-nav-btn-primary {
+  background: #e94560;
+  border-color: #e94560;
+}
+@media (max-width: 600px) {
+  .hero-nav-email { display: none; }
+  .hero-nav-btn { padding: 6px 12px; font-size: 0.8rem; }
+}

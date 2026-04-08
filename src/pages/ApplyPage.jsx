@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
 import '../ApplyPage.css'
 
 const categories = [
@@ -10,6 +11,7 @@ const categories = [
 
 function ApplyPage() {
   const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
   const [form, setForm] = useState({
     name: '',
     shop_name: '',
@@ -124,6 +126,25 @@ function ApplyPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="apply-page">
+        <div className="apply-container">
+          <h1 className="apply-title">出店申込み</h1>
+          <div className="apply-login-cta">
+            <p className="apply-cta-icon">🏪</p>
+            <p className="apply-cta-text">出店申込みはログイン後にご利用いただけます</p>
+            <p className="apply-cta-desc">無料でアカウントを作成してご利用ください。</p>
+            <div className="apply-cta-buttons">
+              <Link to="/login" className="btn btn-primary">ログイン</Link>
+              <Link to="/register" className="btn btn-secondary">新規登録（無料）</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (

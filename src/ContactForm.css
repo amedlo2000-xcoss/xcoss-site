@@ -67,3 +67,23 @@
   border-radius: 6px;
   font-size: 0.95rem;
 }
+
+/* ハーフオープンCTA */
+.contact-login-cta {
+  background: #f9f9f9;
+  border: 2px dashed #e0e0e0;
+  border-radius: 10px;
+  padding: 32px;
+  text-align: center;
+}
+.contact-cta-text {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 16px;
+}
+.contact-cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

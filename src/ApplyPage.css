@@ -125,3 +125,30 @@
   font-weight: bold;
   margin-top: 4px;
 }
+/* ハーフオープンCTA */
+.apply-login-cta {
+  background: white;
+  border-radius: 12px;
+  padding: 48px 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  text-align: center;
+  margin-top: 24px;
+}
+.apply-cta-icon { font-size: 3rem; margin-bottom: 16px; }
+.apply-cta-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+}
+.apply-cta-desc {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 24px;
+}
+.apply-cta-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

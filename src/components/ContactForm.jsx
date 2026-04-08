@@ -1,8 +1,11 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
 import '../ContactForm.css'
 
 function ContactForm() {
+  const { isAuthenticated } = useAuth()
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -40,6 +43,18 @@ function ContactForm() {
     }
 
     setLoading(false)
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="contact-login-cta">
+        <p className="contact-cta-text">💬 お問い合わせはログイン後にご利用いただけます</p>
+        <div className="contact-cta-buttons">
+          <Link to="/login" className="btn btn-primary">ログイン</Link>
+          <Link to="/register" className="btn btn-secondary">新規登録（無料）</Link>
+        </div>
+      </div>
+    )
   }
 
   return (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import '../App.css'
 import ExhibitorCard from '../components/ExhibitorCard'
 import ContactForm from '../components/ContactForm'
@@ -18,15 +19,35 @@ const faq = [
 
 function Hero() {
   const navigate = useNavigate()
+  const { isAuthenticated, user } = useAuth()
 
   const scrollTo = (id) => {
     const el = document.getElementById(id)
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    navigate('/')
+  }
+
   return (
     <section className="hero">
       <div className="container">
+        {/* ログイン状態バー */}
+        <div className="hero-auth-bar">
+          {isAuthenticated ? (
+            <div className="hero-auth-user">
+              <span className="hero-auth-email">👤 {user?.email}</span>
+              <button className="hero-auth-btn" onClick={handleLogout}>ログアウト</button>
+            </div>
+          ) : (
+            <div className="hero-auth-btns">
+              <button className="hero-auth-btn" onClick={() => navigate('/login')}>ログイン</button>
+              <button className="hero-auth-btn hero-auth-btn-primary" onClick={() => navigate('/register')}>新規登録</button>
+            </div>
+          )}
+        </div>
         <h1 className="hero-title">XCOSS 出店者紹介サイト</h1>
         <p className="hero-desc">XCOSSはハンドメイド・フード・アートなど多彩なジャンルが集まるマーケットイベントです。個性あふれる出店者たちとの出会いをお楽しみください。</p>
         <div className="hero-buttons">
@@ -65,9 +86,11 @@ function Categories() {
 
 function Vendors() {
   const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
   const [exhibitors, setExhibitors] = useState([])
   const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('すべて')
+  const PREVIEW_COUNT = 3
 
   useEffect(() => {
     const fetchExhibitors = async () => {
@@ -88,6 +111,8 @@ function Vendors() {
     : exhibitors.filter((ex) => ex.category === selectedCategory)
 
   const usedCategories = ['すべて', ...Array.from(new Set(exhibitors.map((ex) => ex.category).filter(Boolean)))]
+  const visibleExhibitors = isAuthenticated ? filteredExhibitors : filteredExhibitors.slice(0, PREVIEW_COUNT)
+  const hasMore = !isAuthenticated && filteredExhibitors.length > PREVIEW_COUNT
 
   return (
     <section className="section" id="vendors">
@@ -111,19 +136,33 @@ function Vendors() {
         ) : filteredExhibitors.length === 0 ? (
           <p style={{ color: '#999' }}>該当する出店者はいません。</p>
         ) : (
-          <div className="vendor-grid">
-            {filteredExhibitors.map((ex) => (
-              <div key={ex.id} onClick={() => navigate(`/exhibitor/${ex.id}`)} style={{ cursor: 'pointer' }}>
-                <ExhibitorCard
-                  image={ex.image_url || 'https://placehold.co/400x200?text=No+Image'}
-                  shopName={ex.shop_name}
-                  title={ex.title}
-                  description={ex.description}
-                  price={ex.price}
-                />
+          <>
+            <div className="vendor-grid">
+              {visibleExhibitors.map((ex) => (
+                <div key={ex.id} onClick={() => navigate(`/exhibitor/${ex.id}`)} style={{ cursor: 'pointer' }}>
+                  <ExhibitorCard
+                    image={ex.image_url || 'https://placehold.co/400x200?text=No+Image'}
+                    shopName={ex.shop_name}
+                    title={ex.title}
+                    description={ex.description}
+                    price={ex.price}
+                  />
+                </div>
+              ))}
+            </div>
+            {hasMore && (
+              <div className="half-open-cta">
+                <div className="half-open-blur" />
+                <div className="half-open-box">
+                  <p className="half-open-text">他 {filteredExhibitors.length - PREVIEW_COUNT} 件の出店者を見るには</p>
+                  <div className="half-open-btns">
+                    <button className="btn btn-primary" onClick={() => navigate('/login')}>ログイン</button>
+                    <button className="btn btn-secondary" onClick={() => navigate('/register')}>無料登録</button>
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { useAuth } from '../context/AuthContext'
 import '../ExhibitorDetail.css'
 
 function ExhibitorDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { isAuthenticated } = useAuth()
   const [exhibitor, setExhibitor] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -16,14 +18,27 @@ function ExhibitorDetail() {
         .select('*')
         .eq('id', id)
         .single()
-
       if (!error) setExhibitor(data)
       setLoading(false)
     }
     fetchExhibitor()
   }, [id])
 
-  if (loading) return <div className="detail-page"><div className="detail-container"><p>読み込み中...</p></div></div>
+  const handleContact = () => {
+    navigate('/')
+    setTimeout(() => {
+      const el = document.getElementById('contact')
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    }, 300)
+  }
+
+  if (loading) return (
+    <div className="detail-page">
+      <div className="detail-container">
+        <p>読み込み中...</p>
+      </div>
+    </div>
+  )
 
   if (!exhibitor) {
     return (
@@ -48,7 +63,20 @@ function ExhibitorDetail() {
           <h1 className="detail-title">{exhibitor.title}</h1>
           <p className="detail-description">{exhibitor.description}</p>
           <p className="detail-price">💴 {exhibitor.price}</p>
-          <button className="btn btn-primary detail-btn">お問い合わせ</button>
+
+          {isAuthenticated ? (
+            <>
+              <button className="btn btn-primary detail-btn" onClick={handleContact}>お問い合わせ</button>
+            </>
+          ) : (
+            <div className="detail-lock-box">
+              <p className="detail-lock-text">🔒 詳細情報・お問い合わせはログイン後にご覧いただけます</p>
+              <div className="detail-lock-actions">
+                <Link to="/login" className="btn btn-primary detail-btn-link">ログイン</Link>
+                <Link to="/register" className="btn btn-secondary detail-btn-link">新規登録</Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
