@@ -362,3 +362,14 @@
   .summary-value { font-size: 1rem; }
   .activity-graph { gap: 4px; }
 }
+
+/* 先月比較 */
+.summary-diff {
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+.diff-up { background: #e6f9ee; color: #1e7e3e; }
+.diff-down { background: #ffe0e0; color: #c00; }
+.diff-none { background: #f0f0f0; color: #999; }

@@ -37,7 +37,16 @@ function ActivityGraph({ referralsData, participationsData, guestReferralsData }
   })
 
   const thisMonthData = monthlyData.find(m => m.month === thisMonth) || { referrals: 0, participations: 0, guests: 0, score: 0 }
+  const lastMonth = months[months.length - 2]
+  const lastMonthData = monthlyData.find(m => m.month === lastMonth) || { referrals: 0, participations: 0, guests: 0, score: 0 }
   const maxScore = Math.max(...monthlyData.map(m => m.score), 1)
+
+  const diff = (curr, prev) => {
+    const d = curr - prev
+    if (d > 0) return { text: `+${d}`, cls: 'diff-up' }
+    if (d < 0) return { text: `${d}`, cls: 'diff-down' }
+    return { text: '±0', cls: 'diff-none' }
+  }
 
   // 活動指数レベル
   const getLevel = (score) => {
@@ -118,18 +127,27 @@ function ActivityGraph({ referralsData, participationsData, guestReferralsData }
           <span className="summary-value">{thisMonthData.referrals}件</span>
           <span className="summary-label">出店紹介</span>
           <span className="summary-pt">+{thisMonthData.referrals * 5}pt</span>
+          <span className={`summary-diff ${diff(thisMonthData.referrals, lastMonthData.referrals).cls}`}>
+            先月比 {diff(thisMonthData.referrals, lastMonthData.referrals).text}件
+          </span>
         </div>
         <div className="summary-card">
           <span className="summary-icon">📅</span>
           <span className="summary-value">{thisMonthData.participations}回</span>
           <span className="summary-label">イベント参加</span>
           <span className="summary-pt">+{thisMonthData.participations * 2}pt</span>
+          <span className={`summary-diff ${diff(thisMonthData.participations, lastMonthData.participations).cls}`}>
+            先月比 {diff(thisMonthData.participations, lastMonthData.participations).text}回
+          </span>
         </div>
         <div className="summary-card">
           <span className="summary-icon">👥</span>
           <span className="summary-value">{thisMonthData.guests}名</span>
           <span className="summary-label">ゲスト紹介</span>
           <span className="summary-pt">+{thisMonthData.guests * 4}pt</span>
+          <span className={`summary-diff ${diff(thisMonthData.guests, lastMonthData.guests).cls}`}>
+            先月比 {diff(thisMonthData.guests, lastMonthData.guests).text}名
+          </span>
         </div>
       </div>
     </div>
@@ -172,7 +190,7 @@ function ReferrerMyPage() {
       { data: guestReferralsData },
     ] = await Promise.all([
       supabase.from('referrals').select('*, exhibitors(shop_name, title, status, created_at)').eq('referrer_id', referrerData.id).order('created_at', { ascending: false }),
-      supabase.from('referral_rewards').select('*, exhibitors(shop_name)').eq('referrer_id', referrerData.id).order('created_at', { ascending: false }),
+      supabase.from('referral_rewards').select('*, exhibitors(shop_name)').eq('referrer_id', referrerData.id),
       supabase.from('event_participations').select('*').eq('referrer_id', referrerData.id),
       supabase.from('guest_referrals').select('*').eq('referrer_id', referrerData.id),
     ])
