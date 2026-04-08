@@ -15,6 +15,7 @@ import RegisterPage from './pages/RegisterPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
 import UpdatePasswordPage from './pages/UpdatePasswordPage'
 import UserMyPage from './pages/UserMyPage'
+import AuthCallbackPage from './pages/AuthCallbackPage'
 import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Route path="/reset-password" element={<ResetPasswordPage />} />
       <Route path="/update-password" element={<UpdatePasswordPage />} />
       <Route path="/mypage" element={<UserMyPage />} />
+      <Route path="/auth/callback" element={<AuthCallbackPage />} />
       <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
   )
