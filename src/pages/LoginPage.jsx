@@ -21,7 +21,7 @@ function LoginPage() {
       setError('ログインに失敗しました。メールアドレスとパスワードを確認してください。')
       setLoading(false)
     } else {
-      navigate('/')
+      navigate('/mypage')
     }
   }
 
