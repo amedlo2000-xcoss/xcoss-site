@@ -21,6 +21,16 @@ function UserMyPage() {
     if (user) fetchData()
   }, [user])
 
+  const [emailResent, setEmailResent] = useState(false)
+
+  const handleResendEmail = async () => {
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email: user.email,
+    })
+    if (!error) setEmailResent(true)
+  }
+
   const fetchData = async () => {
     setLoading(true)
     const [{ data: profileData }, { data: participationsData }] = await Promise.all([
@@ -53,6 +63,19 @@ function UserMyPage() {
         </div>
       </div>
 
+      {user && !user.email_confirmed_at && (
+        <div className="user-email-warning">
+          <p>📧 メールアドレスの確認が完了していません。</p>
+          <p>登録時に送信した確認メールをご確認ください。</p>
+          {emailResent ? (
+            <p className="user-email-resent">✅ 確認メールを再送しました！</p>
+          ) : (
+            <button className="user-resend-btn" onClick={handleResendEmail}>
+              確認メールを再送する
+            </button>
+          )}
+        </div>
+      )}
       <div className="user-container">
 
         {/* プロフィール */}
@@ -65,6 +88,7 @@ function UserMyPage() {
             {profile?.referral_code_used && (
               <p className="user-info">🔑 紹介コード：{profile.referral_code_used}</p>
             )}
+            <p className="user-info">📅 登録日：{profile?.created_at ? new Date(profile.created_at).toLocaleDateString('ja-JP') : '-'}</p>
           </div>
         </div>
 

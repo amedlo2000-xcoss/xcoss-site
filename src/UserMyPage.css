@@ -138,3 +138,31 @@
   .user-header { flex-direction: column; align-items: flex-start; }
   .user-participation-header { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
+
+/* メール確認警告 */
+.user-email-warning {
+  background: #fff3cd;
+  border-left: 4px solid #f39c12;
+  padding: 16px 24px;
+  font-size: 0.9rem;
+  color: #856404;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.user-email-resent {
+  color: #1e7e3e;
+  font-weight: bold;
+}
+.user-resend-btn {
+  background: #f39c12;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: fit-content;
+  transition: opacity 0.2s;
+}
+.user-resend-btn:hover { opacity: 0.85; }
