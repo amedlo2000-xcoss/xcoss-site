@@ -39,6 +39,7 @@ function Hero() {
           {isAuthenticated ? (
             <div className="hero-auth-user">
               <span className="hero-auth-email">👤 {user?.email}</span>
+              <Link to="/mypage" className="hero-auth-btn">マイページ</Link>
               <button className="hero-auth-btn" onClick={handleLogout}>ログアウト</button>
             </div>
           ) : (
