@@ -333,3 +333,24 @@ body::before {
   position: relative;
   z-index: 1;
 }
+/* XCOSSについてセクション */
+.about-section { position: relative; }
+.about-content {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 12px;
+  padding: 24px 28px;
+  backdrop-filter: blur(2px);
+  max-width: 700px;
+  margin: 0 auto;
+}
+.about-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 20px;
+  line-height: 1.9;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+@media (max-width: 768px) {
+  .about-text { font-size: 16px; line-height: 1.8; }
+  .about-content { padding: 18px 16px; }
+}

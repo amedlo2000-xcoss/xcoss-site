@@ -70,10 +70,12 @@ function Hero() {
 
 function About() {
   return (
-    <section className="section">
+    <section className="section about-section">
       <div className="container">
         <h2 className="section-title">XCOSSについて</h2>
-        <p className="section-text">XCOSSは年2回開催される大型マーケットイベントです。全国から集まった個性豊かな出店者が、こだわりの商品やサービスを直接お届けします。来場者と出店者が直接つながれる場として、毎回多くの方にご来場いただいています。</p>
+        <div className="about-content">
+          <p className="about-text">XCOSSのマルシェは既に開催している主催者や幹事たちが集結して一つのリアルマーケティングを作り上げる仕組みです。マルシェの出店者たちも本来のマルシェの考え方を学ぶことでよくある無駄な時間を過ごす内容とは違う。</p>
+        </div>
       </div>
     </section>
   )
