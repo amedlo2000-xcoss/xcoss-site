@@ -6,26 +6,55 @@
 /* ログイン画面 */
 .referrer-login-box {
   max-width: 420px;
-  margin: 80px auto;
+  margin: 40px auto;
   background: #141414;
   border: 1px solid rgba(201,168,76,0.25);
   border-top: 3px solid var(--gold, #C9A84C);
-  border-radius: 16px;
-  padding: 40px 32px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  border-radius: 20px;
+  padding: 40px 28px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.7);
   text-align: center;
 }
+.referrer-login-logo {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 0 12px rgba(201,168,76,0.4));
+}
 .referrer-login-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   background: linear-gradient(135deg, #E8C97A, #C9A84C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 8px;
-  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  letter-spacing: 0.06em;
 }
-.referrer-login-desc { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+.referrer-login-subtitle {
+  font-size: 0.75rem;
+  color: rgba(201,168,76,0.5);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.referrer-login-desc {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+.referrer-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.referrer-input-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 1rem;
+  pointer-events: none;
+}
 .referrer-error {
   background: rgba(220,50,50,0.1);
   border: 1px solid rgba(220,50,50,0.25);
@@ -37,32 +66,35 @@
 }
 .referrer-login-form { display: flex; flex-direction: column; gap: 16px; }
 .referrer-code-input {
-  padding: 14px 16px;
+  width: 100%;
+  padding: 16px 16px 16px 44px;
   border: 1px solid rgba(201,168,76,0.25);
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   color: #fff;
   background: #1a1a1a;
   outline: none;
   transition: border-color 0.2s;
-  text-align: center;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
+  font-weight: 600;
 }
 .referrer-code-input:focus { border-color: var(--gold, #C9A84C); }
 .referrer-code-input::placeholder { color: rgba(255,255,255,0.2); }
 .referrer-login-btn {
-  padding: 14px;
+  padding: 16px;
   background: linear-gradient(135deg, #C9A84C, #A07830);
   color: #000;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+  box-shadow: 0 6px 24px rgba(201,168,76,0.3);
+  letter-spacing: 0.04em;
+  width: 100%;
 }
-.referrer-login-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+.referrer-login-btn:hover { opacity: 0.88; transform: translateY(-2px); }
 .referrer-login-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
 /* マイページ */

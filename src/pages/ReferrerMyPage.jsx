@@ -234,20 +234,25 @@ function ReferrerMyPage() {
     return (
       <div className="referrer-page">
         <div className="referrer-login-box">
-          <h1 className="referrer-login-title">紹介者マイページ</h1>
-          <p className="referrer-login-desc">紹介コードを入力してログインしてください。</p>
+          <div className="referrer-login-logo">🤝</div>
+          <h1 className="referrer-login-title">幹事マイページ</h1>
+          <p className="referrer-login-subtitle">XCOSS 幹事専用</p>
+          <p className="referrer-login-desc">発行された紹介コードを入力してログインしてください。</p>
           {error && <p className="referrer-error">{error}</p>}
           <form onSubmit={handleLogin} className="referrer-login-form">
-            <input
-              className="referrer-code-input"
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="例：XCOSS-XXXXXX"
-              required
-            />
+            <div className="referrer-input-wrap">
+              <span className="referrer-input-icon">🔑</span>
+              <input
+                className="referrer-code-input"
+                type="text"
+                value={code}
+                onChange={(e) => setCode(e.target.value.toUpperCase())}
+                placeholder="例：XCOSS-XXXXXX"
+                required
+              />
+            </div>
             <button className="referrer-login-btn" type="submit" disabled={loading}>
-              {loading ? '確認中...' : 'ログイン'}
+              {loading ? '確認中...' : '幹事ページにログイン'}
             </button>
           </form>
         </div>
