@@ -1,15 +1,13 @@
 .detail-page {
   min-height: 100vh;
   background: #f5f5f5;
-  padding: 60px 0;
+  padding: 40px 0;
 }
-
 .detail-container {
-  max-width: 720px;
+  max-width: 860px;
   margin: 0 auto;
   padding: 0 24px;
 }
-
 .detail-back {
   background: none;
   border: none;
@@ -20,60 +18,44 @@
   margin-bottom: 24px;
   display: inline-block;
 }
+.detail-back:hover { text-decoration: underline; }
 
-.detail-back:hover {
-  text-decoration: underline;
+.exhibitor-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 32px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
-
-.detail-image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 32px;
-}
-
-.detail-body {
-  background: white;
-  border-radius: 12px;
-  padding: 32px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.detail-shop-name {
-  font-size: 0.85rem;
-  color: #e94560;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-}
-
-.detail-title {
-  font-size: 1.6rem;
-  font-weight: bold;
+.shop-name {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
   color: #1a1a2e;
 }
-
-.detail-description {
-  font-size: 1rem;
-  color: #555;
+.catch-copy {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  color: #222;
+  margin-bottom: 24px;
+}
+.description {
+  font-size: 18px;
   line-height: 1.8;
+  color: #555;
+  text-align: center;
+  margin-bottom: 32px;
+  white-space: pre-wrap;
 }
-
-.detail-price {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
+.trial-price {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  color: #111;
 }
-
-.detail-btn {
-  padding: 14px 0;
-  font-size: 1rem;
-  width: 100%;
-}
-
 .detail-not-found {
   text-align: center;
   padding: 80px 24px;
@@ -83,37 +65,12 @@
   gap: 24px;
 }
 
-@media (max-width: 600px) {
-  .detail-image { height: 200px; }
-  .detail-body { padding: 20px; }
-  .detail-title { font-size: 1.3rem; }
+@media (max-width: 768px) {
+  .exhibitor-detail {
+    padding: 24px 20px;
+  }
+  .shop-name { font-size: 26px; }
+  .catch-copy { font-size: 18px; }
+  .description { font-size: 16px; }
+  .trial-price { font-size: 20px; }
 }
-
-/* ハーフオープンCTA */
-.detail-login-cta {
-  background: #f9f9f9;
-  border: 2px dashed #e0e0e0;
-  border-radius: 10px;
-  padding: 24px;
-  text-align: center;
-  margin-top: 8px;
-}
-.detail-cta-text {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 16px;
-}
-.detail-cta-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.detail-sns-link {
-  display: inline-block;
-  color: #0f3460;
-  font-size: 0.9rem;
-  text-decoration: none;
-  margin-bottom: 8px;
-}
-.detail-sns-link:hover { text-decoration: underline; }

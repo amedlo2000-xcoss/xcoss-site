@@ -236,3 +236,48 @@
 @media (max-width: 900px) {
   .user-logo-right { display: none; }
 }
+
+/* イベントボタン */
+.user-event-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* 入場券 */
+.user-ticket-card {
+  border: 2px solid #e94560;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.user-ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-ticket-event {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a1a2e;
+}
+.user-ticket-status {
+  font-size: 0.8rem;
+  background: #e6f9ee;
+  color: #1e7e3e;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.user-ticket-code {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: #e94560;
+  background: #fff5f7;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: center;
+}

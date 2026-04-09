@@ -10,6 +10,7 @@ function UserMyPage() {
   const { user, isAuthenticated, isLoading } = useAuth()
   const [profile, setProfile] = useState(null)
   const [participations, setParticipations] = useState([])
+  const [tickets, setTickets] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -34,12 +35,14 @@ function UserMyPage() {
 
   const fetchData = async () => {
     setLoading(true)
-    const [{ data: profileData }, { data: participationsData }] = await Promise.all([
+    const [{ data: profileData }, { data: participationsData }, { data: ticketsData }] = await Promise.all([
       supabase.from('user_profiles').select('*').eq('id', user.id).single(),
       supabase.from('event_participations').select('*, events(name, date, venue)').eq('guest_user_id', user.id).order('participated_at', { ascending: false }),
+      supabase.from('tickets').select('*, events(name, date, venue)').eq('user_id', user.id).eq('status', 'active').order('created_at', { ascending: false }),
     ])
     if (profileData) setProfile(profileData)
     if (participationsData) setParticipations(participationsData)
+    if (ticketsData) setTickets(ticketsData)
     setLoading(false)
   }
 
@@ -92,6 +95,42 @@ function UserMyPage() {
             )}
             <p className="user-info">📅 登録日：{profile?.created_at ? new Date(profile.created_at).toLocaleDateString('ja-JP') : '-'}</p>
           </div>
+        </div>
+
+        {/* イベントボタン */}
+        <div className="user-card-box">
+          <h2 className="user-section-title">イベント</h2>
+          <div className="user-event-actions">
+            <Link to="/events" className="user-cta-btn">🎪 イベント一覧を見る</Link>
+          </div>
+        </div>
+
+        {/* 入場券一覧 */}
+        <div className="user-card-box">
+          <h2 className="user-section-title">
+            発行済み入場券
+            <span className="user-count-badge">{tickets.length} / 3件</span>
+          </h2>
+          {tickets.length === 0 ? (
+            <div className="user-empty">
+              <p>まだ入場券はありません。</p>
+              <Link to="/events" className="user-cta-btn">イベントを見る</Link>
+            </div>
+          ) : (
+            <div className="user-participation-list">
+              {tickets.map((t) => (
+                <div key={t.id} className="user-ticket-card">
+                  <div className="user-ticket-header">
+                    <span className="user-ticket-event">{t.events?.name || 'イベント'}</span>
+                    <span className="user-ticket-status">有効</span>
+                  </div>
+                  <div className="user-ticket-code">{t.ticket_code}</div>
+                  {t.events?.date && <p className="user-participation-date">📅 {t.events.date}</p>}
+                  {t.events?.venue && <p className="user-participation-venue">📍 {t.events.venue}</p>}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* イベント参加履歴 */}

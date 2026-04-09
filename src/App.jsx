@@ -17,6 +17,8 @@ import ResetPasswordPage from './pages/ResetPasswordPage'
 import UpdatePasswordPage from './pages/UpdatePasswordPage'
 import UserMyPage from './pages/UserMyPage'
 import AuthCallbackPage from './pages/AuthCallbackPage'
+import EventsPage from './pages/EventsPage'
+import EventDetailPage from './pages/EventDetailPage'
 import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
       <Route path="/update-password" element={<UpdatePasswordPage />} />
       <Route path="/mypage" element={<UserMyPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+      <Route path="/events" element={<EventsPage />} />
+      <Route path="/events/:id" element={<EventDetailPage />} />
       <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
   )

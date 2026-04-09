@@ -2,17 +2,18 @@ import '../ExhibitorCard.css'
 
 function ExhibitorCard({ image, shopName, title, description, price }) {
   return (
-    <div className="exhibitor-card">
-      <div className="card-image-wrap">
-        <img src={image} alt={shopName} className="card-image" />
+    <div className="shop-card">
+      <div className="logo-area">
+        {image ? (
+          <img src={image} alt={shopName} />
+        ) : (
+          <div className="no-image">No Image</div>
+        )}
       </div>
-      <div className="card-body">
-        <p className="card-shop-name">{shopName}</p>
-        <h3 className="card-title">{title}</h3>
-        <p className="card-description">{description}</p>
-        <p className="card-price">💴 {price}</p>
-        <button className="card-btn">お問い合わせ</button>
-      </div>
+      <div className="shop-name">{shopName}</div>
+      {title && <div className="catch-copy">{title}</div>}
+      {description && <p className="card-description">{description}</p>}
+      {price && <p className="card-price">💴 {price}</p>}
     </div>
   )
 }
