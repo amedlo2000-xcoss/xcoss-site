@@ -1,89 +1,66 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   max-width: 600px;
 }
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.form-group { display: flex; flex-direction: column; gap: 6px; }
 .form-label {
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(201,168,76,0.8);
+  letter-spacing: 0.04em;
 }
-.form-input,
-.form-textarea {
-  padding: 12px 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  color: #333;
-  background-color: #ffffff;
+.form-input, .form-textarea {
+  padding: 13px 14px;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  font-size: 0.92rem;
+  color: #fff;
+  background: #1a1a1a;
   outline: none;
   transition: border-color 0.2s;
   font-family: inherit;
 }
-.form-input:focus,
-.form-textarea:focus {
-  border-color: #e94560;
-}
-.form-textarea {
-  resize: vertical;
-}
+.form-input:focus, .form-textarea:focus { border-color: var(--gold, #C9A84C); }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+.form-textarea { resize: vertical; }
 .form-submit {
-  padding: 14px;
-  background-color: #e94560;
-  color: white;
+  padding: 15px;
+  background: linear-gradient(135deg, #C9A84C, #A07830);
+  color: #000;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 20px rgba(201,168,76,0.25);
 }
-.form-submit:hover {
-  opacity: 0.85;
-}
-.form-submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
 .contact-success {
-  background: #e6f9ee;
-  color: #1e7e3e;
-  border: 1px solid #a3d9b1;
+  background: rgba(76,175,80,0.1);
+  border: 1px solid rgba(76,175,80,0.25);
+  color: #4caf50;
   padding: 14px 16px;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
   font-weight: bold;
 }
 .contact-error {
-  background: #ffe0e0;
-  color: #c00;
-  border: 1px solid #f5a5a5;
+  background: rgba(220,50,50,0.1);
+  border: 1px solid rgba(220,50,50,0.25);
+  color: #ff6b6b;
   padding: 14px 16px;
-  border-radius: 6px;
-  font-size: 0.95rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
 }
-
-/* ハーフオープンCTA */
 .contact-login-cta {
-  background: #f9f9f9;
-  border: 2px dashed #e0e0e0;
-  border-radius: 10px;
+  background: #141414;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
   padding: 32px;
   text-align: center;
 }
-.contact-cta-text {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 16px;
-}
-.contact-cta-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+.contact-cta-text { font-size: 0.95rem; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+.contact-cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
