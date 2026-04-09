@@ -17,8 +17,7 @@ function BottomNav() {
 
   // 管理者ページでは非表示
   if (location.pathname.startsWith('/admin')) return null
-  // 紹介者ページでは非表示
-  if (location.pathname.startsWith('/referrer')) return null
+  // 紹介者ページはそのまま表示
 
   const handleNav = (item) => {
     if (item.path === '/#vendors') {
