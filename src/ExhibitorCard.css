@@ -1,60 +1,65 @@
 .shop-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  background: var(--card-bg, #141414);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 14px;
+  padding: 20px;
   text-align: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s;
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 .shop-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(201,168,76,0.2);
+  border-color: rgba(201,168,76,0.6);
 }
 .logo-area {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  padding: 8px 0;
 }
 .logo-area img {
   width: 70%;
   max-width: 220px;
   height: auto;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 .no-image {
   width: 70%;
-  height: 120px;
-  background: #eee;
+  height: 100px;
+  background: #1a1a1a;
+  border: 1px dashed rgba(201,168,76,0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
-  border-radius: 12px;
-  font-size: 0.9rem;
+  color: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  font-size: 0.85rem;
 }
 .shop-name {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-align: center;
-  margin-top: 8px;
-  color: #1a1a2e;
+  margin-top: 4px;
+  color: #fff;
+  letter-spacing: 0.03em;
 }
 .catch-copy {
-  font-size: 14px;
+  font-size: 0.82rem;
   text-align: center;
-  color: #666;
-  margin-top: 4px;
+  color: rgba(201,168,76,0.8);
+  margin-top: 6px;
   line-height: 1.5;
 }
 .card-description {
-  font-size: 0.85rem;
-  color: #888;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
   margin-top: 8px;
   line-height: 1.6;
   text-align: center;
@@ -64,15 +69,13 @@
   overflow: hidden;
 }
 .card-price {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: bold;
-  color: #333;
+  color: var(--gold, #C9A84C);
   margin-top: 8px;
 }
 
-@media (max-width: 768px) {
-  .logo-area img { width: 80%; }
-  .no-image { width: 80%; }
-  .shop-name { font-size: 18px; }
-  .catch-copy { font-size: 13px; }
+@media (max-width: 600px) {
+  .logo-area img { width: 75%; }
+  .shop-name { font-size: 1rem; }
 }
