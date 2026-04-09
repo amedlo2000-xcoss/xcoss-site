@@ -109,3 +109,10 @@ body::after {
   .btn { padding: 14px 20px; font-size: 0.95rem; width: 100%; text-align: center; }
   .container { padding: 0 16px; }
 }
+
+/* ボトムナビ分の余白（スマホのみ） */
+@media (max-width: 768px) {
+  #root {
+    padding-bottom: 64px;
+  }
+}

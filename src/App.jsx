@@ -9,6 +9,7 @@ import AdminEditPage from './pages/AdminEditPage'
 import AdminNewExhibitorPage from './pages/AdminNewExhibitorPage'
 import AdminContactsPage from './pages/AdminContactsPage'
 import AdminEventsPage from './pages/AdminEventsPage'
+import BottomNav from './components/BottomNav'
 import AdminReferrersPage from './pages/AdminReferrersPage'
 import ReferrerMyPage from './pages/ReferrerMyPage'
 import LoginPage from './pages/LoginPage'
@@ -23,6 +24,7 @@ import AdminRewardsPage from './pages/AdminRewardsPage'
 
 function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<TopPage />} />
       <Route path="/exhibitor/:id" element={<ExhibitorDetail />} />
@@ -46,6 +48,8 @@ function App() {
       <Route path="/events/:id" element={<EventDetailPage />} />
       <Route path="/admin/rewards" element={<AdminRewardsPage />} />
     </Routes>
+    <BottomNav />
+    </>
   )
 }
 
