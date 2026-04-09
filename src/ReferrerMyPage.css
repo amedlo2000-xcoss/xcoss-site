@@ -380,3 +380,57 @@
     padding-bottom: 80px;
   }
 }
+
+/* 報酬サマリー */
+.reward-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.reward-summary-card {
+  border-radius: 12px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+}
+.reward-total {
+  background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(160,120,48,0.1));
+  border: 1px solid rgba(201,168,76,0.3);
+  grid-column: 1 / -1;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.reward-first {
+  background: rgba(76,175,80,0.08);
+  border: 1px solid rgba(76,175,80,0.2);
+}
+.reward-repeat {
+  background: rgba(74,144,217,0.08);
+  border: 1px solid rgba(74,144,217,0.2);
+}
+.reward-summary-label {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.04em;
+}
+.reward-summary-amount {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #E8C97A, #C9A84C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.reward-amount-sm { font-size: 1.2rem; }
+.reward-summary-sub {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 400px) {
+  .reward-total { flex-direction: column; text-align: center; }
+}

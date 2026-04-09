@@ -328,6 +328,34 @@ function ReferrerMyPage() {
           )}
         </div>
 
+        {/* 報酬サマリー */}
+        <div className="referrer-card-box">
+          <h2 className="referrer-section-title">💰 報酬サマリー</h2>
+          <div className="reward-summary-grid">
+            <div className="reward-summary-card reward-total">
+              <span className="reward-summary-label">累計報酬</span>
+              <span className="reward-summary-amount">
+                ¥{rewards.reduce((sum, r) => sum + (r.reward_amount || 0), 0).toLocaleString()}
+              </span>
+              <span className="reward-summary-sub">{rewards.length}件</span>
+            </div>
+            <div className="reward-summary-card reward-first">
+              <span className="reward-summary-label">初回紹介</span>
+              <span className="reward-summary-amount reward-amount-sm">
+                {rewards.filter(r => r.reward_rate === 70).length}件
+              </span>
+              <span className="reward-summary-sub">報酬率 70%</span>
+            </div>
+            <div className="reward-summary-card reward-repeat">
+              <span className="reward-summary-label">リピーター</span>
+              <span className="reward-summary-amount reward-amount-sm">
+                {rewards.filter(r => r.reward_rate === 50).length}件
+              </span>
+              <span className="reward-summary-sub">報酬率 50%</span>
+            </div>
+          </div>
+        </div>
+
         {/* 報酬履歴 */}
         <div className="referrer-card-box">
           <h2 className="referrer-section-title">
