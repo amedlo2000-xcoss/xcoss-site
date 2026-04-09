@@ -373,3 +373,10 @@
   .referrer-profile-hero { flex-wrap: wrap; }
   .referrer-profile-code-badge { align-items: flex-start; margin-top: 8px; width: 100%; }
 }
+
+/* ボトムナビ分の余白 */
+@media (max-width: 768px) {
+  .referrer-container {
+    padding-bottom: 80px;
+  }
+}
