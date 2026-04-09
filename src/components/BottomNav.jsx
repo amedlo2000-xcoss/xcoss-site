@@ -1,13 +1,13 @@
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { supabase } from '../lib/supabase'
 import './BottomNav.css'
 
 const navItems = [
   { label: 'ホーム', icon: '🏠', path: '/' },
-  { label: 'イベント', icon: '🎪', path: '/events' },
-  { label: 'チケット', icon: '🎟️', path: '/mypage' },
-  { label: '出店者', icon: '🏪', path: '/#vendors' },
   { label: 'マイページ', icon: '👤', path: '/mypage' },
+  { label: 'イベント', icon: '🎪', path: '/events' },
+  { label: '幹事', icon: '🤝', path: '/referrer' },
 ]
 
 function BottomNav() {
@@ -17,17 +17,8 @@ function BottomNav() {
 
   // 管理者ページでは非表示
   if (location.pathname.startsWith('/admin')) return null
-  // 紹介者ページはそのまま表示
 
   const handleNav = (item) => {
-    if (item.path === '/#vendors') {
-      navigate('/')
-      setTimeout(() => {
-        const el = document.getElementById('vendors')
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      }, 100)
-      return
-    }
     if ((item.path === '/mypage' || item.path === '/events') && !isAuthenticated) {
       navigate('/login')
       return
@@ -35,10 +26,12 @@ function BottomNav() {
     navigate(item.path)
   }
 
-  const isActive = (item) => {
-    if (item.path === '/#vendors') return location.pathname === '/'
-    return location.pathname === item.path
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    navigate('/')
   }
+
+  const isActive = (item) => location.pathname === item.path
 
   return (
     <nav className="bottom-nav">
@@ -52,6 +45,10 @@ function BottomNav() {
           <span className="bottom-nav-label">{item.label}</span>
         </button>
       ))}
+      <button className="bottom-nav-item logout" onClick={handleLogout}>
+        <span className="bottom-nav-icon">🚪</span>
+        <span className="bottom-nav-label">ログアウト</span>
+      </button>
     </nav>
   )
 }

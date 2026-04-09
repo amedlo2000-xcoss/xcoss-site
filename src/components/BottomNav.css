@@ -1,5 +1,5 @@
 .bottom-nav {
-  display: none; /* デフォルトは非表示 */
+  display: none;
 }
 
 @media (max-width: 768px) {
@@ -9,13 +9,14 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 64px;
-    background: #0f0f0f;
+    height: 72px;
+    background: #0f1118;
     border-top: 1px solid rgba(201,168,76,0.25);
     z-index: 1000;
     align-items: stretch;
     padding-bottom: env(safe-area-inset-bottom);
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.6);
+    box-shadow: 0 -6px 18px rgba(0,0,0,0.5);
+    justify-content: space-around;
   }
 
   .bottom-nav-item {
@@ -46,12 +47,10 @@
     transition: opacity 0.2s;
   }
 
-  .bottom-nav-item.active::before {
-    opacity: 1;
-  }
+  .bottom-nav-item.active::before { opacity: 1; }
 
   .bottom-nav-icon {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     line-height: 1;
     transition: transform 0.2s;
   }
@@ -61,8 +60,8 @@
   }
 
   .bottom-nav-label {
-    font-size: 0.62rem;
-    color: rgba(255,255,255,0.4);
+    font-size: 0.58rem;
+    color: #9aa0a6;
     font-weight: 500;
     letter-spacing: 0.02em;
     transition: color 0.2s;
@@ -71,6 +70,14 @@
   .bottom-nav-item.active .bottom-nav-label {
     color: var(--gold, #C9A84C);
     font-weight: 700;
+  }
+
+  .bottom-nav-item.logout .bottom-nav-label {
+    color: rgba(220,100,100,0.7);
+  }
+
+  .bottom-nav-item.logout:active {
+    background: rgba(220,50,50,0.08);
   }
 
   .bottom-nav-item:active {
