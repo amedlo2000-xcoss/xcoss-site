@@ -434,3 +434,41 @@
 @media (max-width: 400px) {
   .reward-total { flex-direction: column; text-align: center; }
 }
+
+/* ショートカット導線 */
+.referrer-shortcuts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.referrer-shortcut-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 10px;
+  background: #1a1a1a;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  text-align: center;
+}
+.referrer-shortcut-btn:hover {
+  border-color: rgba(201,168,76,0.5);
+  color: var(--gold, #C9A84C);
+  background: rgba(201,168,76,0.06);
+  transform: translateY(-2px);
+}
+.referrer-shortcut-icon {
+  font-size: 1.4rem;
+}
+
+@media (max-width: 400px) {
+  .referrer-shortcuts { grid-template-columns: 1fr; }
+}

@@ -382,6 +382,29 @@ function ReferrerMyPage() {
           )}
         </div>
 
+      {/* ショートカット導線 */}
+        <div className="referrer-card-box">
+          <h2 className="referrer-section-title">🚀 クイックアクション</h2>
+          <div className="referrer-shortcuts">
+            <a href="#referrals" className="referrer-shortcut-btn" onClick={(e) => { e.preventDefault(); document.querySelector('.referrer-referrals-section')?.scrollIntoView({ behavior: 'smooth' }) }}>
+              <span className="referrer-shortcut-icon">📋</span>
+              <span>紹介一覧を見る</span>
+            </a>
+            <a href="#rewards" className="referrer-shortcut-btn" onClick={(e) => { e.preventDefault(); document.querySelector('.referrer-rewards-section')?.scrollIntoView({ behavior: 'smooth' }) }}>
+              <span className="referrer-shortcut-icon">💰</span>
+              <span>報酬履歴を見る</span>
+            </a>
+            <a href="#activity" className="referrer-shortcut-btn" onClick={(e) => { e.preventDefault(); document.querySelector('.referrer-activity-section')?.scrollIntoView({ behavior: 'smooth' }) }}>
+              <span className="referrer-shortcut-icon">📊</span>
+              <span>月別集計を見る</span>
+            </a>
+            <button className="referrer-shortcut-btn" onClick={handleCopy}>
+              <span className="referrer-shortcut-icon">🔗</span>
+              <span>{copied ? 'コピー済み！' : '紹介リンクをコピー'}</span>
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   )
