@@ -20,6 +20,21 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
+
+/* ヒーロー内の蜂ロゴ装飾 */
+.hero-logo2-bg {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 200px;
+  height: 200px;
+  background-image: var(--logo2-url, none);
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
 .hero-nav {
   padding: 8px 0;
   margin-bottom: 32px;
