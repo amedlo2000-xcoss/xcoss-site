@@ -263,18 +263,23 @@ function ReferrerMyPage() {
   return (
     <div className="referrer-page">
       <div className="referrer-header">
-        <h1 className="referrer-header-title">紹介者マイページ</h1>
+        <h1 className="referrer-header-title">幹事ダッシュボード</h1>
         <button className="referrer-logout-btn" onClick={handleLogout}>ログアウト</button>
       </div>
 
       <div className="referrer-container">
 
-        {/* プロフィール */}
-        <div className="referrer-card-box">
-          <h2 className="referrer-section-title">プロフィール</h2>
-          <p className="referrer-info">👤 {referrer.nickname || referrer.name}</p>
-          <p className="referrer-info">📧 {referrer.email}</p>
-          <p className="referrer-info">🔑 紹介コード：<strong>{referrer.code}</strong></p>
+        {/* プロフィールカード */}
+        <div className="referrer-profile-hero">
+          <div className="referrer-profile-avatar">🤝</div>
+          <div className="referrer-profile-info">
+            <p className="referrer-profile-name">{referrer.nickname || referrer.name}</p>
+            <p className="referrer-profile-role">XCOSS 幹事メンバー</p>
+          </div>
+          <div className="referrer-profile-code-badge">
+            <span className="referrer-profile-code-label">紹介コード</span>
+            <span className="referrer-profile-code-value">{referrer.code}</span>
+          </div>
         </div>
 
         {/* 活動インジケーター */}
@@ -285,15 +290,15 @@ function ReferrerMyPage() {
         />
 
         {/* 紹介リンク */}
-        <div className="referrer-card-box">
-          <h2 className="referrer-section-title">紹介リンク</h2>
-          <p className="referrer-link-desc">このリンクを出店希望者に共有してください。</p>
-          <div className="referrer-link-wrap">
-            <input className="referrer-link-input" type="text" value={referralLink} readOnly />
-            <button className="referrer-copy-btn" onClick={handleCopy}>
-              {copied ? '✅ コピー済み' : 'コピー'}
-            </button>
+        <div className="referrer-card-box referrer-link-card">
+          <h2 className="referrer-section-title">🔗 紹介リンク</h2>
+          <p className="referrer-link-desc">出店希望者にこのリンクを共有してください</p>
+          <div className="referrer-link-display">
+            <span className="referrer-link-text">{referralLink}</span>
           </div>
+          <button className="referrer-copy-btn-full" onClick={handleCopy}>
+            {copied ? '✅ コピーしました！' : '📋 リンクをコピーする'}
+          </button>
         </div>
 
         {/* 紹介実績 */}

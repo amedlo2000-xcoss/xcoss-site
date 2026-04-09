@@ -272,3 +272,104 @@
   .activity-summary { gap: 8px; }
   .summary-card { padding: 10px 4px; }
 }
+
+/* ===== ダッシュボード改善 ===== */
+
+/* プロフィールヒーロー */
+.referrer-profile-hero {
+  background: linear-gradient(135deg, #1a1200, #141414);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.referrer-profile-avatar {
+  font-size: 2.4rem;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.referrer-profile-info { flex: 1; }
+.referrer-profile-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 2px;
+}
+.referrer-profile-role {
+  font-size: 0.72rem;
+  color: rgba(201,168,76,0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.referrer-profile-code-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.referrer-profile-code-label {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.06em;
+}
+.referrer-profile-code-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #E8C97A, #C9A84C);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.06em;
+}
+
+/* 紹介リンクカード */
+.referrer-link-card { position: relative; }
+.referrer-link-display {
+  background: #0f0f0f;
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.referrer-link-text {
+  font-size: 0.78rem;
+  color: rgba(201,168,76,0.6);
+  word-break: break-all;
+  line-height: 1.5;
+}
+.referrer-copy-btn-full {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #C9A84C, #A07830);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+  box-shadow: 0 4px 16px rgba(201,168,76,0.25);
+}
+.referrer-copy-btn-full:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* ヘッダー改善 */
+.referrer-header {
+  background: linear-gradient(90deg, #0a0a0a, #140f00);
+}
+
+@media (max-width: 600px) {
+  .referrer-profile-hero { flex-wrap: wrap; }
+  .referrer-profile-code-badge { align-items: flex-start; margin-top: 8px; width: 100%; }
+}
