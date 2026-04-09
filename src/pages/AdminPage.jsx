@@ -124,6 +124,9 @@ function AdminPage() {
         </div>
       </div>
       <div className="admin-container">
+        <div className="admin-top-actions">
+          <button className="action-btn new-exhibitor" onClick={() => navigate('/admin/new')}>＋ 新規出店者登録</button>
+        </div>
         <div className="filter-tabs">
           <button className={`filter-tab ${filter === 'pending' ? 'active' : ''}`} onClick={() => setFilter('pending')}>審査待ち</button>
           <button className={`filter-tab ${filter === 'approved' ? 'active' : ''}`} onClick={() => setFilter('approved')}>承認済み</button>

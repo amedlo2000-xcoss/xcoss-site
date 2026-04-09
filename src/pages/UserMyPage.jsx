@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import xcossLogo from '../assets/xcoss-logo.jpg'
 import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
@@ -48,13 +49,13 @@ function UserMyPage() {
   }
 
   if (isLoading || loading) return (
-    <div className="user-mypage">
+    <div className="user-mypage" style={{ "--logo-url": `url(${xcossLogo})` }}>
       <p className="user-loading">読み込み中...</p>
     </div>
   )
 
   return (
-    <div className="user-mypage">
+    <div className="user-mypage" style={{ "--logo-url": `url(${xcossLogo})` }}>
       <div className="user-header">
         <h1 className="user-header-title">マイページ</h1>
         <div className="user-header-actions">
@@ -76,7 +77,8 @@ function UserMyPage() {
           )}
         </div>
       )}
-      <div className="user-container">
+      <div className="user-page-wrapper">
+        <div className="user-container">
 
         {/* プロフィール */}
         <div className="user-card-box">
@@ -122,6 +124,7 @@ function UserMyPage() {
           )}
         </div>
 
+        </div>
       </div>
     </div>
   )

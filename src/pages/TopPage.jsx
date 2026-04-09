@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import xcossLogo from '../assets/xcoss-logo.jpg'
 import { useAuth } from '../context/AuthContext'
 import '../App.css'
 import ExhibitorCard from '../components/ExhibitorCard'
@@ -38,7 +39,7 @@ function Hero() {
   }
 
   return (
-    <section className="hero">
+    <section className="hero" style={{ '--logo-url': `url(${xcossLogo})` }}>
       <div className="container">
         {/* ログイン状態バー */}
         <div className="hero-auth-bar">

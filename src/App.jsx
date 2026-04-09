@@ -6,6 +6,7 @@ import ApplyPage from './pages/ApplyPage'
 import AdminLogin from './pages/AdminLogin'
 import AdminPage from './pages/AdminPage'
 import AdminEditPage from './pages/AdminEditPage'
+import AdminNewExhibitorPage from './pages/AdminNewExhibitorPage'
 import AdminContactsPage from './pages/AdminContactsPage'
 import AdminEventsPage from './pages/AdminEventsPage'
 import AdminReferrersPage from './pages/AdminReferrersPage'
@@ -27,6 +28,7 @@ function App() {
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="/admin/edit/:id" element={<AdminEditPage />} />
+      <Route path="/admin/new" element={<AdminNewExhibitorPage />} />
       <Route path="/admin/contacts" element={<AdminContactsPage />} />
       <Route path="/admin/events" element={<AdminEventsPage />} />
       <Route path="/admin/referrers" element={<AdminReferrersPage />} />

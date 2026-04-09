@@ -1,6 +1,31 @@
 .user-mypage {
   min-height: 100vh;
   background: #f5f5f5;
+  position: relative;
+}
+
+/* ロゴ壁紙背景（擬似要素） */
+.user-mypage::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--logo-url);
+  background-size: 120px;
+  background-repeat: repeat;
+  opacity: 0.07;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* コンテンツを前面に */
+.user-header,
+.user-email-warning,
+.user-page-wrapper {
+  position: relative;
+  z-index: 1;
 }
 .user-loading {
   text-align: center;
@@ -55,6 +80,8 @@
   border-radius: 12px;
   padding: 28px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  position: relative;
+  z-index: 1;
 }
 .user-section-title {
   font-size: 1.1rem;
@@ -166,3 +193,46 @@
   transition: opacity 0.2s;
 }
 .user-resend-btn:hover { opacity: 0.85; }
+
+/* サイドロゴ */
+.user-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 32px 24px;
+}
+.user-logo-left {
+  position: sticky;
+  top: 32px;
+  flex-shrink: 0;
+}
+.user-side-logo {
+  width: 160px;
+  opacity: 0.85;
+}
+.user-container {
+  max-width: 720px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .user-logo-left { display: none; }
+  .user-page-wrapper { padding: 16px; }
+}
+
+/* 右側ロゴ */
+.user-logo-right {
+  position: sticky;
+  top: 32px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 900px) {
+  .user-logo-right { display: none; }
+}

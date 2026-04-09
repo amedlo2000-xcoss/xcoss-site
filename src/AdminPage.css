@@ -148,3 +148,18 @@
     padding: 8px 12px;
   }
 }
+
+.admin-top-actions {
+  margin-bottom: 16px;
+}
+.action-btn.new-exhibitor {
+  background: #1a1a2e;
+  color: white;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.action-btn.new-exhibitor:hover { opacity: 0.8; }
